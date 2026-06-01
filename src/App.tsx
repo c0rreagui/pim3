@@ -235,7 +235,7 @@ function App() {
           overflow: 'hidden'
         }} className="hero-spline-overlay">
           <div
-            style={{ width: '100%', height: '100%', transform: 'scale(0.82)', transformOrigin: 'top right' }}
+            style={{ width: '100%', height: '130%' }}
             dangerouslySetInnerHTML={{
               __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%" style="background:transparent"></spline-viewer>'
             }}
