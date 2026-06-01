@@ -229,7 +229,7 @@ function App() {
           top: '75px',
           right: 0,
           bottom: '50px',
-          width: '50%',
+          left: '55%',
           zIndex: 3,
           pointerEvents: 'auto',
           overflow: 'hidden'
@@ -258,7 +258,7 @@ function App() {
             }} className="hero-slide-grid">
               
               {/* Left Column: Text & Content */}
-              <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 2, position: 'relative', maxWidth: '52%' }} className="hero-left-col">
+              <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 2, position: 'relative', maxWidth: '50%' }} className="hero-left-col">
                 {/* WEG Slogan */}
                 <div style={{
                   display: 'inline-flex',
