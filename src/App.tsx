@@ -9,11 +9,71 @@ import { CostParadox } from './components/CostParadox';
 import { AIShowroom } from './components/AIShowroom';
 import { GCLPProgram } from './components/GCLPProgram';
 import { WegLogo } from './components/WegLogo';
-import { GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { GraduationCap, Menu, X, ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Mobile Swipe Slide Transition Gestures
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    setTouchStartX(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null || touchStartY === null) return;
+
+    let target = e.target as HTMLElement | null;
+    let isScrollable = false;
+    while (target) {
+      if (
+        target.classList && 
+        (target.classList.contains('mobile-carousel') || 
+         target.classList.contains('mobile-scroll-tabs') ||
+         target.classList.contains('telemetry-chat-log') ||
+         target.tagName === 'INPUT' || 
+         target.tagName === 'BUTTON' || 
+         target.tagName === 'SELECT' ||
+         target.tagName === 'TEXTAREA' ||
+         target.getAttribute('role') === 'button')
+      ) {
+        isScrollable = true;
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (isScrollable) {
+      setTouchStartX(null);
+      setTouchStartY(null);
+      return;
+    }
+
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+
+    const diffX = touchStartX - endX;
+    const diffY = touchStartY - endY;
+
+    const minSwipeDistance = 50;
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+      if (diffX > 0) {
+        // Swipe left: go to next slide
+        setCurrentSlide((prev) => Math.min(prev + 1, TOTAL_SLIDES - 1));
+      } else {
+        // Swipe right: go to previous slide
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      }
+    }
+
+    setTouchStartX(null);
+    setTouchStartY(null);
+  };
 
   const TOTAL_SLIDES = 11;
 
@@ -174,7 +234,11 @@ function App() {
   };
 
   return (
-    <div className="presentation-container">
+    <div 
+      className="presentation-container"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="top-energy-bar" />
       
       {/* Floating Header */}
@@ -316,14 +380,17 @@ function App() {
                 color: currentSlide === item.index ? 'var(--primary-light)' : '#ffffff',
                 border: 'none',
                 textAlign: 'left',
-                padding: '0.6rem 1rem',
+                padding: '0.85rem 1.25rem',
+                minHeight: '44px',
                 borderRadius: '10px',
                 background: currentSlide === item.index ? 'rgba(59, 130, 246, 0.08)' : 'rgba(255, 255, 255, 0.02)',
                 borderWidth: '1px',
                 borderStyle: 'solid',
                 borderColor: currentSlide === item.index ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255, 255, 255, 0.04)',
                 cursor: 'pointer',
-                width: '100%'
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center'
               }}
             >
               {item.label}
@@ -355,7 +422,7 @@ function App() {
 
       {/* Fullscreen Slide Viewport Canvas */}
       <div className="slide-canvas">
-        <div className="slide-active" key={currentSlide} style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="slide-active" key={currentSlide} style={{ minHeight: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           
           {/* Cover Slide (0) */}
           {currentSlide === 0 && (
@@ -531,6 +598,31 @@ function App() {
                   </div>
                 </div>
               </div>
+
+              {/* Reset Presentation Button - optimized for touch */}
+              <button
+                onClick={() => setCurrentSlide(0)}
+                style={{
+                  marginTop: '2.5rem',
+                  background: 'rgba(59, 130, 246, 0.12)',
+                  border: '1px solid rgba(59, 130, 246, 0.3)',
+                  color: 'var(--primary-light)',
+                  padding: '0.75rem 2rem',
+                  minHeight: '44px',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+                }}
+              >
+                <RotateCcw size={16} /> Reiniciar Apresentação
+              </button>
             </div>
           )}
 
@@ -638,8 +730,11 @@ function App() {
           transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
         }} />
 
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+        <div className="mobile-hide" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
           <strong>WEG S.A.</strong> • PROJETO INTEGRADO MULTIDISCIPLINAR III • MARKETING
+        </div>
+        <div className="desktop-hide" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          <strong>WEG S.A.</strong> • PIM III
         </div>
 
         <div style={{

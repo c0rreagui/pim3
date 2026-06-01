@@ -4,6 +4,7 @@ import { Eye, ShieldAlert, Radio, Check } from 'lucide-react';
 
 export const AIShowroom: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'vision' | 'iot' | 'chat'>('vision');
+  const [mobileTab, setMobileTab] = useState<'explainers' | 'simulators'>('explainers');
 
   // WEGvision.AI Simulator State
   const [conveyorRunning, setConveyorRunning] = useState(false);
@@ -65,7 +66,7 @@ export const AIShowroom: React.FC = () => {
   };
 
   return (
-    <section id="inteligencia-artificial-marketing" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
+    <section id="inteligencia-artificial-marketing" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader
         tag="TÓPICO 8"
         title="Inteligência Artificial Aplicada ao Marketing"
@@ -76,28 +77,80 @@ export const AIShowroom: React.FC = () => {
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '2rem',
-        marginBottom: '2rem'
+        gap: '1.5rem',
+        marginBottom: '0.5rem',
+        flex: 1
       }}>
+        {/* Sub-tab Selector for Mobile */}
+        <div className="desktop-hide" style={{
+          display: 'flex',
+          background: 'rgba(10, 15, 36, 0.6)',
+          padding: '0.25rem',
+          borderRadius: '10px',
+          border: '1px solid rgba(255, 255, 255, 0.05)',
+          gap: '0.25rem',
+          gridColumn: '1 / -1',
+          marginBottom: '0.25rem',
+          width: '100%'
+        }}>
+          <button
+            onClick={() => setMobileTab('explainers')}
+            style={{
+              flex: 1,
+              padding: '0.5rem 0.75rem',
+              borderRadius: '8px',
+              border: 'none',
+              background: mobileTab === 'explainers' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              color: mobileTab === 'explainers' ? '#ffffff' : 'var(--text-secondary)',
+              fontWeight: 700,
+              fontSize: 'var(--text-sm)',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            Visão &amp; IoT
+          </button>
+          <button
+            onClick={() => setMobileTab('simulators')}
+            style={{
+              flex: 1,
+              padding: '0.5rem 0.75rem',
+              borderRadius: '8px',
+              border: 'none',
+              background: mobileTab === 'simulators' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              color: mobileTab === 'simulators' ? '#ffffff' : 'var(--text-secondary)',
+              fontWeight: 700,
+              fontSize: 'var(--text-sm)',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            Simuladores IA
+          </button>
+        </div>
+
         {/* Texts */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
-            <div className="glass-panel" style={{ padding: '1.75rem' }}>
-              <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Eye size={18} style={{ color: 'var(--primary-light)' }} />
+        <div 
+          className={mobileTab !== 'explainers' ? 'mobile-hide' : ''}
+          style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}
+        >
+            <div className="glass-panel" style={{ padding: '1.25rem' }}>
+              <h4 style={{ fontSize: 'var(--text-lg)', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Eye size={16} style={{ color: 'var(--primary-light)' }} />
                 Visão Computacional: WEGvision.AI
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.5', margin: 0 }}>
                 • <strong style={{ color: '#ffffff' }}>Monitoramento Inteligente:</strong> Desenvolvido com a Intel, atua como sistema de visão computacional autônomo nas esteiras B2B.<br/>
                 • <strong style={{ color: 'var(--primary-light)' }}>Zero Desperdício:</strong> Detecta sacos rasgados em alta velocidade, elevando a <strong style={{ color: 'var(--success)' }}>eficiência de ensaque em 4%</strong>.
               </p>
             </div>
 
-            <div className="glass-panel" style={{ padding: '1.75rem' }}>
-              <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Radio size={18} style={{ color: 'var(--primary-light)' }} />
+            <div className="glass-panel" style={{ padding: '1.25rem' }}>
+              <h4 style={{ fontSize: 'var(--text-lg)', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Radio size={16} style={{ color: 'var(--primary-light)' }} />
                 CRM Preditivo Conectado ao IoT
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.5', margin: 0 }}>
                 • <strong style={{ color: '#ffffff' }}>Sensores WEGscan:</strong> Monitoramento contínuo de temperatura e vibração triaxial diretamente em campo.<br/>
                 • <strong style={{ color: 'var(--primary-light)' }}>Ação Preditiva:</strong> Anomalias detectadas em nuvem acionam o <strong style={{ color: '#ffffff' }}>CRM da WEG</strong> para disparar campanhas de troca personalizadas antes de uma parada inesperada.
               </p>
@@ -105,22 +158,23 @@ export const AIShowroom: React.FC = () => {
         </div>
 
         {/* Dynamic AI Showroom Box */}
-        <div className="glass-panel" style={{ padding: '2rem', border: '1px solid var(--border-active)', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div className={`glass-panel ${mobileTab !== 'simulators' ? 'mobile-hide' : ''}`} style={{ padding: '1.25rem', border: '1px solid var(--border-active)', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
           {/* Tab selector */}
-          <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255, 255, 255, 0.03)', padding: '0.25rem', borderRadius: '10px' }}>
+          <div className="mobile-scroll-tabs" style={{ display: 'flex', gap: '0.25rem', background: 'rgba(255, 255, 255, 0.03)', padding: '0.25rem', borderRadius: '10px', width: '100%' }}>
             <button 
               onClick={() => setActiveTab('vision')}
               style={{
                 flex: 1,
-                padding: '0.5rem',
+                padding: '0.5rem 0.75rem',
                 border: 'none',
                 borderRadius: '8px',
                 background: activeTab === 'vision' ? 'var(--primary-light)' : 'transparent',
                 color: activeTab === 'vision' ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: 600,
                 cursor: 'pointer',
-                fontSize: '0.8rem',
-                transition: 'all 0.2s'
+                fontSize: 'var(--text-sm)',
+                transition: 'all 0.2s',
+                flexShrink: 0
               }}
             >
               WEGvision.AI
@@ -129,15 +183,16 @@ export const AIShowroom: React.FC = () => {
               onClick={() => setActiveTab('iot')}
               style={{
                 flex: 1,
-                padding: '0.5rem',
+                padding: '0.5rem 0.75rem',
                 border: 'none',
                 borderRadius: '8px',
                 background: activeTab === 'iot' ? 'var(--primary-light)' : 'transparent',
                 color: activeTab === 'iot' ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: 600,
                 cursor: 'pointer',
-                fontSize: '0.8rem',
-                transition: 'all 0.2s'
+                fontSize: 'var(--text-sm)',
+                transition: 'all 0.2s',
+                flexShrink: 0
               }}
             >
               WEGscan IoT
@@ -146,15 +201,16 @@ export const AIShowroom: React.FC = () => {
               onClick={() => setActiveTab('chat')}
               style={{
                 flex: 1,
-                padding: '0.5rem',
+                padding: '0.5rem 0.75rem',
                 border: 'none',
                 borderRadius: '8px',
                 background: activeTab === 'chat' ? 'var(--primary-light)' : 'transparent',
                 color: activeTab === 'chat' ? '#ffffff' : 'var(--text-secondary)',
                 fontWeight: 600,
                 cursor: 'pointer',
-                fontSize: '0.8rem',
-                transition: 'all 0.2s'
+                fontSize: 'var(--text-sm)',
+                transition: 'all 0.2s',
+                flexShrink: 0
               }}
             >
               Suporte Chat
@@ -163,7 +219,7 @@ export const AIShowroom: React.FC = () => {
 
           {/* TAB 1: WEGvision.AI */}
           {activeTab === 'vision' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', animation: 'fadeIn 0.3s' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', animation: 'fadeIn 0.3s', flex: 1 }}>
               <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#ffffff' }}>Simulador de Esteira Industrial WEGvision.AI:</span>
               
               {/* Conveyor Belt Visual Box */}
@@ -187,11 +243,15 @@ export const AIShowroom: React.FC = () => {
                         background: 'var(--primary-light)',
                         border: 'none',
                         color: '#ffffff',
-                        padding: '0.5rem 1rem',
+                        padding: '0.65rem 1.25rem',
+                        minHeight: '44px',
                         borderRadius: '8px',
                         fontWeight: 600,
                         cursor: 'pointer',
-                        fontSize: '0.75rem'
+                        fontSize: '0.75rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                       }}
                     >
                       Iniciar Scanner
@@ -230,20 +290,24 @@ export const AIShowroom: React.FC = () => {
                     animation: 'pulseGlow 1.5s infinite',
                     textAlign: 'center'
                   }}>
-                    <span style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ef4444' }}>⚠️ DETECTADO: SACO RASGADO</span>
-                    <span style={{ fontSize: '0.75rem', color: '#fca5a5', marginTop: '0.25rem' }}>Esteira Interrompida Automaticamente</span>
+                    <span style={{ fontSize: 'var(--text-md)', fontWeight: 800, color: '#ef4444' }}>⚠️ DETECTADO: SACO RASGADO</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: '#fca5a5', marginTop: '0.25rem' }}>Esteira Interrompida Automaticamente</span>
                     <button 
                       onClick={() => setBagStatus('ok')}
                       style={{
                         background: '#ffffff',
                         border: 'none',
                         color: '#111827',
-                        padding: '0.25rem 0.75rem',
+                        padding: '0.5rem 1rem',
+                        minHeight: '44px',
                         borderRadius: '6px',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        fontSize: '0.7rem',
-                        marginTop: '0.5rem'
+                        fontSize: 'var(--text-xs)',
+                        marginTop: '0.5rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                       }}
                     >
                       Limpar Alerta
@@ -275,11 +339,11 @@ export const AIShowroom: React.FC = () => {
           {/* TAB 2: WEGscan IoT */}
           {activeTab === 'iot' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', animation: 'fadeIn 0.3s' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#ffffff' }}>Telemetria do Sensor IoT WEGscan:</span>
-
+              <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: '#ffffff' }}>Telemetria do Sensor IoT WEGscan:</span>
+ 
               {/* Temperature Slider */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                   <span>Temperatura Superficial do Motor:</span>
                   <strong style={{ color: temperature > 80 ? '#ef4444' : '#ffffff' }}>{temperature} °C</strong>
                 </div>
@@ -292,10 +356,10 @@ export const AIShowroom: React.FC = () => {
                   style={{ width: '100%', accentColor: temperature > 80 ? '#ef4444' : 'var(--primary-light)' }}
                 />
               </div>
-
+ 
               {/* Vibration Slider */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                   <span>Vibração Triaxial (Rotor):</span>
                   <strong style={{ color: vibration > 5.5 ? '#ef4444' : '#ffffff' }}>{vibration.toFixed(1)} mm/s</strong>
                 </div>
@@ -309,14 +373,14 @@ export const AIShowroom: React.FC = () => {
                   style={{ width: '100%', accentColor: vibration > 5.5 ? '#ef4444' : 'var(--primary-light)' }}
                 />
               </div>
-
+ 
               {/* CRM dispatched Alert */}
               <div style={{
                 background: isIotAnomaly ? 'rgba(239, 68, 68, 0.08)' : 'rgba(16, 185, 129, 0.05)',
                 border: isIotAnomaly ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid rgba(16, 185, 129, 0.15)',
                 borderRadius: '8px',
                 padding: '0.75rem',
-                fontSize: '0.75rem',
+                fontSize: 'var(--text-sm)',
                 color: '#ffffff',
                 display: 'flex',
                 flexDirection: 'column',
@@ -347,25 +411,28 @@ export const AIShowroom: React.FC = () => {
               </div>
             </div>
           )}
-
+ 
           {/* TAB 3: Generative AI Chatbot */}
           {activeTab === 'chat' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', animation: 'fadeIn 0.3s' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#ffffff' }}>Assistente Conversacional de Engenharia:</span>
-
+              <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: '#ffffff' }}>Assistente Conversacional de Engenharia:</span>
+ 
               {/* Chat messages viewport */}
-              <div style={{
-                height: '160px',
-                background: 'rgba(0, 0, 0, 0.5)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '10px',
-                padding: '0.75rem',
-                overflowY: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.75rem',
-                fontSize: '0.75rem'
-              }}>
+              <div 
+                className="telemetry-chat-log"
+                style={{
+                  height: '160px',
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '10px',
+                  padding: '0.75rem',
+                  overflowY: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  fontSize: 'var(--text-sm)'
+                }}
+              >
                 {chatMessages.map((msg, idx) => (
                   <div key={idx} style={{
                     alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
@@ -380,22 +447,25 @@ export const AIShowroom: React.FC = () => {
                   </div>
                 ))}
               </div>
-
+ 
               {/* Clickable Quick Questions */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>PERGUNTE AO CHATBOT:</span>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 600 }}>PERGUNTE AO CHATBOT:</span>
                 <button 
                   onClick={() => handleChatQuestion('Qual a diferença prática entre motores IE4 e IE5?')}
                   style={{
                     background: 'rgba(255,255,255,0.02)',
                     border: '1px solid rgba(255,255,255,0.05)',
                     color: 'var(--text-secondary)',
-                    padding: '0.4rem',
+                    padding: '0.65rem 1rem',
+                    minHeight: '44px',
                     borderRadius: '6px',
                     textAlign: 'left',
                     fontSize: '0.7rem',
                     cursor: 'pointer',
-                    transition: 'background 0.2s'
+                    transition: 'background 0.2s',
+                    display: 'flex',
+                    alignItems: 'center'
                   }}
                 >
                   "Qual a diferença prática entre motores IE4 e IE5?"
@@ -406,12 +476,15 @@ export const AIShowroom: React.FC = () => {
                     background: 'rgba(255,255,255,0.02)',
                     border: '1px solid rgba(255,255,255,0.05)',
                     color: 'var(--text-secondary)',
-                    padding: '0.4rem',
+                    padding: '0.65rem 1rem',
+                    minHeight: '44px',
                     borderRadius: '6px',
                     textAlign: 'left',
                     fontSize: '0.7rem',
                     cursor: 'pointer',
-                    transition: 'background 0.2s'
+                    transition: 'background 0.2s',
+                    display: 'flex',
+                    alignItems: 'center'
                   }}
                 >
                   "O que fazer se o inversor CFW500 der erro?"

@@ -71,7 +71,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
         justifyContent: 'space-between'
       }}>
         <span style={{
-          fontSize: '0.85rem',
+          fontSize: 'var(--text-sm)',
           fontWeight: 600,
           color: 'var(--text-secondary)',
           textTransform: 'uppercase',
@@ -93,7 +93,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
       </div>
       <div>
         <h3 style={{
-          fontSize: '2.5rem',
+          fontSize: 'var(--text-3xl)',
           fontWeight: 800,
           fontFamily: 'var(--font-heading)',
           color: '#ffffff',
@@ -103,7 +103,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
           {prefix}{formattedCount}{suffix}
         </h3>
         <p style={{
-          fontSize: '0.9rem',
+          fontSize: 'var(--text-base)',
           color: 'var(--text-secondary)',
           fontWeight: 500
         }}>
@@ -113,7 +113,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
       <div style={{
         borderTop: '1px solid rgba(255, 255, 255, 0.05)',
         paddingTop: '0.75rem',
-        fontSize: '0.8rem',
+        fontSize: 'var(--text-sm)',
         color: 'var(--text-muted)'
       }}>
         {subtext}
@@ -124,7 +124,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
 
 export const NumbersDashboard: React.FC = () => {
   return (
-    <section id="weg-em-numeros" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
+    <section id="weg-em-numeros" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader 
         tag="TÓPICO 1" 
         title="WEG em Números — 2025" 
@@ -132,11 +132,11 @@ export const NumbersDashboard: React.FC = () => {
         accentColor="#3b82f6"
       />
 
-      <div style={{
+      <div className="mobile-carousel" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-        gap: '1.5rem',
-        marginBottom: '3rem'
+        gap: '1rem',
+        marginBottom: 'clamp(0.5rem, 2vh, 1.5rem)'
       }}>
         <MetricCard 
           icon={<Landmark size={20} />}
@@ -188,14 +188,14 @@ export const NumbersDashboard: React.FC = () => {
         <div style={{ textAlign: 'left' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success)', marginBottom: '0.75rem' }}>
             <Leaf size={18} />
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               ESG & Descarbonização
             </span>
           </div>
-          <h4 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', color: '#ffffff' }}>
+          <h4 style={{ fontSize: 'var(--text-xl)', fontWeight: 700, marginBottom: '1rem', color: '#ffffff' }}>
             A Força do Faturamento Sustentável
           </h4>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', marginBottom: '1.25rem', lineHeight: '1.6' }}>
             A WEG direciona seu portfólio estrategicamente para o futuro sustentável. Hoje, <strong style={{ color: '#ffffff' }}>71% da receita operacional</strong> da companhia vem de produtos de descarbonização e eficiência energética. Na WEG, o crescimento e o <strong style={{ color: 'var(--success)' }}>impacto ecológico positivo</strong> andam sempre juntos.
           </p>
           <div style={{
@@ -208,13 +208,13 @@ export const NumbersDashboard: React.FC = () => {
             border: '1px solid rgba(255, 255, 255, 0.05)'
           }}>
             <Info size={16} style={{ color: 'var(--primary-light)', marginTop: '0.2rem', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+            <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
               <strong>Nota PIM III:</strong> Este percentual de 71% valida o posicionamento competitivo verde frente a exigências rigorosas de reguladores europeus e norte-americanos.
             </span>
           </div>
         </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+ 
+        <div className="mobile-hide" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
           {/* Radial Graph */}
           <svg width="220" height="220" viewBox="0 0 220 220" style={{ transform: 'rotate(-90deg)' }}>
             <circle 
@@ -255,7 +255,7 @@ export const NumbersDashboard: React.FC = () => {
             justifyContent: 'center'
           }}>
             <span style={{
-              fontSize: '2.5rem',
+              fontSize: 'var(--text-3xl)',
               fontWeight: 800,
               fontFamily: 'var(--font-heading)',
               color: '#ffffff',
@@ -264,7 +264,7 @@ export const NumbersDashboard: React.FC = () => {
               71%
             </span>
             <span style={{
-              fontSize: '0.75rem',
+              fontSize: 'var(--text-xs)',
               color: 'var(--text-secondary)',
               fontWeight: 600,
               textTransform: 'uppercase',

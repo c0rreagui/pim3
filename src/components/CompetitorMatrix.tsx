@@ -6,6 +6,7 @@ import { WegLogo } from './WegLogo';
 export const CompetitorMatrix: React.FC = () => {
   const [activeView, setActiveView] = useState<'decision' | 'matrix'>('decision');
   const [tariffProb, setTariffProb] = useState(65.38);
+  const [decisionTab, setDecisionTab] = useState<'strategy' | 'simulator'>('strategy');
 
   const isCriticalThreshold = tariffProb >= 50;
 
@@ -34,7 +35,7 @@ export const CompetitorMatrix: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
         <SectionHeader
           tag="TÓPICO 4"
@@ -93,25 +94,76 @@ export const CompetitorMatrix: React.FC = () => {
           gap: '1.5rem',
           animation: 'fadeIn 0.3s ease-out'
         }}>
+          {/* Sub-tab Selector for Mobile */}
+          <div className="desktop-hide" style={{
+            display: 'flex',
+            background: 'rgba(10, 15, 36, 0.6)',
+            padding: '0.25rem',
+            borderRadius: '10px',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            gap: '0.25rem',
+            gridColumn: '1 / -1',
+            marginBottom: '0.25rem',
+            width: '100%'
+          }}>
+            <button
+              onClick={() => setDecisionTab('strategy')}
+              style={{
+                flex: 1,
+                padding: '0.5rem 0.75rem',
+                borderRadius: '8px',
+                border: 'none',
+                background: decisionTab === 'strategy' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+                color: decisionTab === 'strategy' ? '#ffffff' : 'var(--text-secondary)',
+                fontWeight: 700,
+                fontSize: 'var(--text-sm)',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              Defesa & M&A
+            </button>
+            <button
+              onClick={() => setDecisionTab('simulator')}
+              style={{
+                flex: 1,
+                padding: '0.5rem 0.75rem',
+                borderRadius: '8px',
+                border: 'none',
+                background: decisionTab === 'simulator' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+                color: decisionTab === 'simulator' ? '#ffffff' : 'var(--text-secondary)',
+                fontWeight: 700,
+                fontSize: 'var(--text-sm)',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              Simulador de Risco
+            </button>
+          </div>
+
           {/* Left: Competitor cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
+          <div 
+            className={decisionTab !== 'strategy' ? 'mobile-hide' : ''}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}
+          >
             <div className="glass-panel" style={{ padding: '1.25rem' }}>
-              <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <h4 style={{ fontSize: 'var(--text-lg)', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <ShieldCheck size={16} style={{ color: 'var(--primary-light)' }} />
                 Verticalização como Defesa Operacional
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.6', margin: 0 }}>
                 • <strong style={{ color: '#ffffff' }}>Autossuficiência Máxima:</strong> A WEG fabrica internamente seus fios de cobre, chapas de aço silício e tintas protetivas.<br/>
                 • <strong style={{ color: 'var(--primary-light)' }}>Eficiência Extrema:</strong> Esse domínio blinda a logística e assegura um <strong style={{ color: 'var(--success)' }}>ROIC extraordinário de 32,5%</strong> (vs. 17,8% ROCE da Siemens).
               </p>
             </div>
 
             <div className="glass-panel" style={{ padding: '1.25rem' }}>
-              <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <h4 style={{ fontSize: 'var(--text-lg)', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Shuffle size={16} style={{ color: 'var(--primary-light)' }} />
                 M&amp;A Regal Rexnord &amp; Teoria dos Jogos
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.6', margin: 0 }}>
                 • <strong style={{ color: '#ffffff' }}>Expansão de Impacto:</strong> Aquisição da divisão da <strong style={{ color: 'var(--primary-light)' }}>Regal Rexnord por ~US$ 400M</strong> em 2024, garantindo fábricas nos EUA, México e China.<br/>
                 • <strong style={{ color: '#ffffff' }}>Equilíbrio de Nash:</strong> Absorção estratégica de ativos sem iniciar guerras tarifárias de preços com competidores ocidentais.
               </p>
@@ -119,22 +171,25 @@ export const CompetitorMatrix: React.FC = () => {
           </div>
 
           {/* Right: Bayesian Risk Simulator */}
-          <div className="glass-panel" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', textAlign: 'left', border: '1px solid var(--border-active)' }}>
+          <div 
+            className={`glass-panel ${decisionTab !== 'simulator' ? 'mobile-hide' : ''}`}
+            style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left', border: '1px solid var(--border-active)' }}
+          >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>
+              <strong style={{ fontSize: 'var(--text-md)', color: '#ffffff' }}>
                 Simulador Bayesiano de Expansão Local
               </strong>
-              <span style={{ fontSize: '0.65rem', background: 'rgba(59,130,246,0.15)', color: 'var(--primary-light)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: 'var(--text-xs)', background: 'rgba(59,130,246,0.15)', color: 'var(--primary-light)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontFamily: 'var(--font-mono)' }}>
                 RISK PROBABILITY
               </span>
             </div>
 
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.4' }}>
-              A WEG avaliou os sinais macroeconômicos e revisou a probabilidade de tarifas americanas severas, que **saltou de 40% para 65,38%**. Isso ativou a produção local. Mova o slider abaixo para simular a tomada de decisão:
+            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.4' }}>
+              A WEG avaliou os sinais macroeconômicos e revisou a probabilidade de tarifas americanas severas, que <strong style={{ color: 'var(--primary-light)' }}>saltou de 40% para 65,38%</strong>. Isso ativou a produção local. Mova o slider abaixo para simular a tomada de decisão:
             </p>
-
+ 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
                 <span>Probabilidade de Tarifas Severas (P):</span>
                 <strong style={{ color: tariffProb === 65.38 ? 'var(--primary-light)' : '#ffffff' }}>
                   {tariffProb.toFixed(2)}% {tariffProb === 65.38 ? '(DADO DO PDF)' : ''}
@@ -147,9 +202,9 @@ export const CompetitorMatrix: React.FC = () => {
                 step="0.01"
                 value={tariffProb} 
                 onChange={(e) => setTariffProb(Number(e.target.value))}
-                style={{ width: '100%', accentColor: 'var(--primary-light)' }}
+                style={{ width: '100%', accentColor: 'var(--primary-light)', height: '6px' }}
               />
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
                 <span>40% (Risco Inicial)</span>
                 <span onClick={() => setTariffProb(65.38)} style={{ cursor: 'pointer', textDecoration: 'underline', color: 'var(--primary-light)' }}>
                   Reset para 65,38%
@@ -157,13 +212,13 @@ export const CompetitorMatrix: React.FC = () => {
                 <span>100% (Certeza)</span>
               </div>
             </div>
-
+ 
             {/* Tree Branch */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.75rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: 'var(--text-sm)' }}>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                padding: '0.5rem 0.75rem',
+                padding: '0.4rem 0.6rem',
                 borderRadius: '8px',
                 background: !isCriticalThreshold ? 'rgba(255,255,255,0.03)' : 'transparent',
                 border: !isCriticalThreshold ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
@@ -172,11 +227,11 @@ export const CompetitorMatrix: React.FC = () => {
                 <span>Risco Controlável (&lt;50%): Exportações</span>
                 <strong>Foco Centralizado BR</strong>
               </div>
-
+ 
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                padding: '0.5rem 0.75rem',
+                padding: '0.4rem 0.6rem',
                 borderRadius: '8px',
                 background: isCriticalThreshold ? 'rgba(59,130,246,0.08)' : 'transparent',
                 border: isCriticalThreshold ? '1px solid rgba(59,130,246,0.25)' : '1px solid transparent',
@@ -186,15 +241,16 @@ export const CompetitorMatrix: React.FC = () => {
                 <strong>ATIVAR EXPANSÃO LOCAL</strong>
               </div>
             </div>
-
+ 
             <div style={{
               background: isCriticalThreshold ? 'rgba(59,130,246,0.08)' : 'rgba(255,255,255,0.02)',
               border: isCriticalThreshold ? '1px solid rgba(59,130,246,0.18)' : '1px solid rgba(255,255,255,0.04)',
               borderRadius: '8px',
-              padding: '0.6rem',
-              fontSize: '0.75rem',
+              padding: '0.5rem',
+              fontSize: 'var(--text-sm)',
               color: isCriticalThreshold ? '#ffffff' : 'var(--text-secondary)',
-              textAlign: 'center'
+              textAlign: 'center',
+              lineHeight: '1.3'
             }}>
               {isCriticalThreshold ? (
                 <span>
@@ -209,8 +265,8 @@ export const CompetitorMatrix: React.FC = () => {
           </div>
         </div>
       ) : (
-        /* Competitor Comparison View */
-        <div style={{
+        /* Competitor Comparison View - mobile-carousel enabled */
+        <div className="mobile-carousel" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '1.25rem',
@@ -232,10 +288,10 @@ export const CompetitorMatrix: React.FC = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   {comp.logo}
-                  <span style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff' }}>{comp.name}</span>
+                  <span style={{ fontSize: 'var(--text-lg)', fontWeight: 800, color: '#ffffff' }}>{comp.name}</span>
                 </div>
                 <span style={{
-                  fontSize: '0.7rem',
+                  fontSize: 'var(--text-xs)',
                   fontWeight: 700,
                   background: 'rgba(255, 255, 255, 0.05)',
                   padding: '0.2rem 0.5rem',
@@ -246,13 +302,13 @@ export const CompetitorMatrix: React.FC = () => {
                 </span>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.8rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: 'var(--text-sm)' }}>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', fontSize: '0.65rem', fontWeight: 600 }}>Estratégia de Posicionamento</span>
+                  <span style={{ color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', fontSize: 'var(--text-xs)', fontWeight: 600 }}>Estratégia de Posicionamento</span>
                   <p style={{ color: 'var(--text-secondary)', lineHeight: '1.4' }}>{comp.strategy}</p>
                 </div>
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.5rem' }}>
-                  <span style={{ color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', fontSize: '0.65rem', fontWeight: 600 }}>Diferencial / Força</span>
+                  <span style={{ color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', fontSize: 'var(--text-xs)', fontWeight: 600 }}>Diferencial / Força</span>
                   <p style={{ color: 'var(--text-secondary)', lineHeight: '1.4' }}>{comp.strength}</p>
                 </div>
               </div>

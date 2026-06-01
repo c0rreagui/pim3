@@ -14,16 +14,16 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   accentColor = '#3b82f6'
 }) => {
   return (
-    <div style={{ marginBottom: '2.5rem', textAlign: 'left' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+    <div style={{ marginBottom: 'clamp(0.5rem, 2vh, 2rem)', textAlign: 'left' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: 'clamp(0.2rem, 1vh, 0.5rem)' }}>
         <span style={{
-          fontSize: '0.75rem',
+          fontSize: 'var(--text-xs)',
           fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.15em',
           color: accentColor,
           background: `${accentColor}1A`,
-          padding: '0.25rem 0.75rem',
+          padding: '0.2rem 0.6rem',
           borderRadius: '20px',
           border: `1px solid ${accentColor}33`,
           fontFamily: 'var(--font-mono)'
@@ -31,7 +31,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           PIM III • Marketing
         </span>
         <span style={{
-          fontSize: '0.75rem',
+          fontSize: 'var(--text-xs)',
           fontWeight: 500,
           color: 'var(--text-secondary)',
           fontFamily: 'var(--font-mono)'
@@ -40,10 +40,10 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </span>
       </div>
       <h2 style={{
-        fontSize: '2.25rem',
+        fontSize: 'var(--text-2xl)',
         fontWeight: 800,
         lineHeight: 1.2,
-        marginBottom: '0.5rem',
+        marginBottom: '0.25rem',
         background: 'linear-gradient(to right, var(--text-primary), var(--text-secondary))',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
@@ -52,10 +52,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       </h2>
       {subtitle && (
         <p style={{
-          fontSize: '1.05rem',
+          fontSize: 'var(--text-base)',
           color: 'var(--text-secondary)',
           maxWidth: '800px',
-          lineHeight: 1.5
+          lineHeight: 1.4,
+          margin: 0
         }}>
           {subtitle}
         </p>

@@ -37,7 +37,7 @@ export const ESGPillars: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
         <SectionHeader
           tag="TÓPICO 5"
@@ -90,8 +90,8 @@ export const ESGPillars: React.FC = () => {
       </div>
 
       {activeView === 'pillars' ? (
-        /* Pillars View */
-        <div style={{
+        /* Pillars View - mobile-carousel enabled */
+        <div className="mobile-carousel" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '1.25rem',
@@ -100,10 +100,10 @@ export const ESGPillars: React.FC = () => {
         }}>
           {pillars.map((p, idx) => (
             <div key={idx} className="glass-panel" style={{
-              padding: '1.5rem',
+              padding: '1.25rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.75rem',
+              gap: '0.5rem',
               textAlign: 'left'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -118,10 +118,10 @@ export const ESGPillars: React.FC = () => {
                 }}>
                   {p.icon}
                 </div>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff' }}>{p.title}</h4>
+                <h4 style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: '#ffffff' }}>{p.title}</h4>
               </div>
               
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: '1.5', flexGrow: 1 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-base)', lineHeight: '1.5', flexGrow: 1 }}>
                 {p.description}
               </p>
 
@@ -135,8 +135,8 @@ export const ESGPillars: React.FC = () => {
                 gap: '0.15rem',
                 marginTop: '0.25rem'
               }}>
-                <span style={{ fontSize: '0.95rem', fontWeight: 700, color: p.color }}>{p.stats}</span>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{p.subStats}</span>
+                <span style={{ fontSize: 'var(--text-md)', fontWeight: 700, color: p.color }}>{p.stats}</span>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', fontWeight: 500 }}>{p.subStats}</span>
               </div>
             </div>
           ))}
@@ -144,7 +144,7 @@ export const ESGPillars: React.FC = () => {
       ) : (
         /* SBTi Graph View */
         <div className="glass-panel" style={{
-          padding: '1.75rem',
+          padding: '1.25rem',
           textAlign: 'left',
           animation: 'fadeIn 0.3s ease-out'
         }}>
@@ -175,46 +175,84 @@ export const ESGPillars: React.FC = () => {
                   strokeLinecap="round"
                   style={{ filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.3))' }}
                 />
-
+ 
                 {/* Data points */}
                 <circle
                   cx="50"
                   cy="40"
-                  r={hoveredPoint === 'current' ? '8' : '5'}
+                  r={hoveredPoint === 'current' ? 8 : 5}
                   fill="#ffffff"
                   stroke="var(--success)"
                   strokeWidth="3"
                   style={{ cursor: 'pointer', transition: 'r 0.2s' }}
                   onMouseEnter={() => setHoveredPoint('current')}
                   onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === 'current' ? null : 'current')}
                 />
+                {/* Touch Target Expansion (>=44px target) */}
+                <circle
+                  cx="50"
+                  cy="40"
+                  r={22}
+                  fill="transparent"
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => setHoveredPoint('current')}
+                  onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === 'current' ? null : 'current')}
+                />
+
                 <circle
                   cx="220"
                   cy="100"
-                  r={hoveredPoint === '2030' ? '8' : '5'}
+                  r={hoveredPoint === '2030' ? 8 : 5}
                   fill="#ffffff"
                   stroke="var(--success)"
                   strokeWidth="3"
                   style={{ cursor: 'pointer', transition: 'r 0.2s' }}
                   onMouseEnter={() => setHoveredPoint('2030')}
                   onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === '2030' ? null : '2030')}
                 />
+                {/* Touch Target Expansion (>=44px target) */}
+                <circle
+                  cx="220"
+                  cy="100"
+                  r={22}
+                  fill="transparent"
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => setHoveredPoint('2030')}
+                  onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === '2030' ? null : '2030')}
+                />
+
                 <circle
                   cx="450"
                   cy="170"
-                  r={hoveredPoint === '2050' ? '8' : '5'}
+                  r={hoveredPoint === '2050' ? 8 : 5}
                   fill="#ffffff"
                   stroke="var(--success)"
                   strokeWidth="3"
                   style={{ cursor: 'pointer', transition: 'r 0.2s' }}
                   onMouseEnter={() => setHoveredPoint('2050')}
                   onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === '2050' ? null : '2050')}
                 />
-
+                {/* Touch Target Expansion (>=44px target) */}
+                <circle
+                  cx="450"
+                  cy="170"
+                  r={22}
+                  fill="transparent"
+                  style={{ cursor: 'pointer' }}
+                  onMouseEnter={() => setHoveredPoint('2050')}
+                  onMouseLeave={() => setHoveredPoint(null)}
+                  onClick={() => setHoveredPoint(hoveredPoint === '2050' ? null : '2050')}
+                />
+ 
                 <text x="50" y="195" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="600" fontFamily="var(--font-mono)">REAL (2025)</text>
                 <text x="220" y="195" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="600" fontFamily="var(--font-mono)">META 2030</text>
                 <text x="450" y="195" fill="var(--text-secondary)" fontSize="10" textAnchor="middle" fontWeight="600" fontFamily="var(--font-mono)">META 2050</text>
-
+ 
                 <text x="50" y="20" fill="#ffffff" fontSize="11" textAnchor="middle" fontWeight="700">-31,9%</text>
                 <text x="220" y="80" fill="#ffffff" fontSize="11" textAnchor="middle" fontWeight="700">-52%</text>
                 <text x="450" y="150" fill="#ffffff" fontSize="11" textAnchor="middle" fontWeight="700">NET-ZERO</text>
@@ -236,38 +274,38 @@ export const ESGPillars: React.FC = () => {
               }}>
                 {!hoveredPoint ? (
                   <div>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
+                    <span style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.25rem' }}>
                       <Info size={14} style={{ color: 'var(--success)' }} />
                       Auditoria Científica
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                       Passe o mouse ou toque nos pontos do gráfico para revelar os detalhes operacionais de cada marco de emissões da WEG validados pela <strong style={{ color: '#ffffff' }}>SBTi</strong>.
                     </span>
                   </div>
                 ) : hoveredPoint === 'current' ? (
                   <div>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Status Atual: -31,9% nas Emissões</span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Status Atual: -31,9% nas Emissões</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                       Resultados consolidados em 2025 para emissões de Escopo 1 (diretas) e Escopo 2 (energia adquirida). Indica a substituição massiva por fontes limpas internas.
                     </span>
                   </div>
                 ) : hoveredPoint === '2030' ? (
                   <div>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Meta Intermediária 2030: -52%</span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Meta Intermediária 2030: -52%</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                       Compromisso robusto e intermediário de redução absoluta de emissões de carbono operacionais de forma auditável e científica global.
                     </span>
                   </div>
                 ) : (
                   <div>
-                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Fronteira 2050: Net-Zero Total</span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, color: 'var(--success)', display: 'block', marginBottom: '0.25rem' }}>Fronteira 2050: Net-Zero Total</span>
+                    <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                       Neutralização absoluta de toda a cadeia produtiva (incluindo fornecedores e logística - Escopo 3), validando o pioneirismo ecológico global da WEG S.A.
                     </span>
                   </div>
                 )}
               </div>
-
+ 
               <div style={{
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1px solid rgba(255, 255, 255, 0.05)',
@@ -278,7 +316,7 @@ export const ESGPillars: React.FC = () => {
                 gap: '0.5rem'
               }}>
                 <Shield size={16} style={{ color: 'var(--success)', flexShrink: 0 }} />
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+                <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
                   <strong>Metas SBTi:</strong> A Science Based Targets initiative garante que os cortes da WEG estão alinhados ao Acordo de Paris para limitação climática global.
                 </span>
               </div>

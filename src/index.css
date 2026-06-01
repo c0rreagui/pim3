@@ -27,7 +27,17 @@
   --glass-border: rgba(255, 255, 255, 0.06);
   --glass-shadow: rgba(0, 0, 0, 0.65);
   
-  /* Typography */
+  /* Typography Scale - Base */
+  --text-xs: 0.7rem;
+  --text-sm: 0.8rem;
+  --text-base: 0.85rem;
+  --text-md: 0.95rem;
+  --text-lg: 1.15rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 2.5rem;
+
+  /* Typography Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -208,28 +218,41 @@ button, input, select {
 }
 
 /* 🎥 PROJECTOR VIEW OPTIMIZATIONS (High Contrast & Large Font Scale) */
+@media (min-width: 1024px) {
+  :root {
+    --text-xs: 0.82rem;
+    --text-sm: 0.92rem;
+    --text-base: 1.0rem;
+    --text-md: 1.1rem;
+    --text-lg: 1.3rem;
+    --text-xl: 1.65rem;
+    --text-2xl: 2.75rem;
+    --text-3xl: 3.0rem;
+  }
+}
+
 .presentation-container h2 {
-  font-size: 2.75rem !important; /* Scale up main slide title for projection screens */
+  font-size: var(--text-2xl) !important; /* Scale up main slide title for projection screens */
   line-height: 1.15 !important;
   font-weight: 800 !important;
   letter-spacing: -0.03em !important;
 }
 
 .presentation-container p:not(.huge-number-class) {
-  font-size: 1.15rem; /* Increase global descriptive paragraph text */
+  font-size: var(--text-base) !important; /* Increase global descriptive paragraph text */
   line-height: 1.65 !important;
 }
 
 /* Increase card headers for instant scannability from the back */
 .glass-panel h4 {
-  font-size: 1.35rem !important;
+  font-size: var(--text-lg) !important;
   font-weight: 800 !important;
 }
 
 /* High-contrast and bolder body text prevents wash-out by high-power projector lamps */
 .glass-panel p, 
 .glass-panel li {
-  font-size: 1.05rem !important;
+  font-size: var(--text-base) !important;
   font-weight: 500 !important; 
   line-height: 1.65 !important;
   color: #ffffff !important; /* Force pristine white text for deep contrast */
@@ -240,4 +263,149 @@ header button,
 .view-toggle-container button {
   font-size: 0.92rem !important;
   padding: 0.6rem 1.25rem !important;
+}
+
+/* Global breathing room adjustments for projector presentations */
+.slide-canvas {
+  padding-top: 80px !important;
+  padding-bottom: 60px !important;
+}
+
+/* 📱 MOBILE RESPONSIVENESS & ZERO-OVERFLOW DESIGN SYSTEM */
+@media (max-width: 1024px) {
+  /* Dynamic font reduction for mobile to maximize screenspace */
+  :root {
+    --text-xs: 0.72rem !important;
+    --text-sm: 0.8rem !important;
+    --text-base: 0.82rem !important;
+    --text-md: 0.9rem !important;
+    --text-lg: 1.05rem !important;
+    --text-xl: 1.25rem !important;
+    --text-2xl: 1.6rem !important;
+    --text-3xl: 1.8rem !important;
+  }
+
+  .slide-canvas {
+    padding: 0.75rem !important;
+    padding-top: 75px !important;
+    padding-bottom: 50px !important;
+    overflow-y: auto !important; /* Allow vertical swipe scrolling of content on mobile */
+    scrollbar-width: none !important; /* Hide Firefox scrollbar */
+    -webkit-overflow-scrolling: touch !important; /* Smooth inertial touch scroll */
+  }
+
+  .slide-canvas::-webkit-scrollbar {
+    display: none !important; /* Hide Chrome/Safari scrollbar */
+  }
+
+  header {
+    height: 60px !important;
+    padding: 0 1rem !important;
+  }
+
+  header button {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.75rem !important;
+  }
+
+  footer {
+    height: 45px !important;
+    padding: 0 1.25rem !important;
+  }
+
+  /* Premium swipeable horizontal carousel for card groups */
+  .mobile-carousel {
+    display: flex !important;
+    flex-direction: row !important;
+    grid-template-columns: none !important; /* disable grid */
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    width: 100% !important;
+    scrollbar-width: none !important; /* Hide scrollbar for standard design */
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .mobile-carousel::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .mobile-carousel > * {
+    flex: 0 0 90% !important;
+    scroll-snap-align: center !important;
+    max-width: 90% !important;
+    margin: 0 !important;
+  }
+
+  /* Horizontal scroll tabs for segment controls and sliders */
+  .mobile-scroll-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 0.4rem !important;
+    padding-bottom: 0.25rem !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+  }
+
+  .mobile-scroll-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .mobile-scroll-tabs button {
+    flex-shrink: 0 !important;
+    font-size: 0.78rem !important;
+    padding: 0.65rem 1rem !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Force glass panel elements to use less padding and vertical space */
+  .glass-panel {
+    padding: 0.85rem !important;
+    border-radius: 12px !important;
+  }
+
+  /* Compact slider controls to fit mobile screens and expand touch target */
+  input[type="range"] {
+    height: 12px !important; /* Slightly thicker for better touch feedback */
+    padding: 8px 0 !important; /* Touch safety area */
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    width: 24px !important;
+    height: 24px !important;
+    margin-top: -6px !important; /* Align with track */
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.4) !important;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 24px !important;
+    height: 24px !important;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.4) !important;
+  }
+
+  .mobile-menu-btn {
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desktop-hide {
+    display: none !important;
+  }
 }
