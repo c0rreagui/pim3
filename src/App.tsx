@@ -9,7 +9,7 @@ import { CostParadox } from './components/CostParadox';
 import { AIShowroom } from './components/AIShowroom';
 import { GCLPProgram } from './components/GCLPProgram';
 import { WegLogo } from './components/WegLogo';
-import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -299,52 +299,28 @@ function App() {
                     fontWeight: 600
                   }}>
                     <GraduationCap size={16} />
-                    <span>UNIP • PIM III • Marketing Industrial</span>
+                    <span>UNIP • PIM III • Marketing</span>
                   </div>
                 </div>
 
-                <button 
-                  onClick={handleNext}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    background: '#ffffff',
-                    border: 'none',
-                    color: '#030712',
-                    padding: '0.8rem 1.5rem',
-                    borderRadius: '12px',
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    width: 'fit-content',
-                    boxShadow: '0 4px 20px rgba(255, 255, 255, 0.12)',
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s',
-                    pointerEvents: 'auto'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                >
-                  Iniciar Apresentação <ChevronDown size={16} />
-                </button>
+
               </div>
 
-              {/* Right Column: 3D Robot Hand Spline Embed */}
+              {/* Right Column: 3D Robot Arm Spline Embed */}
               <div style={{
-                position: 'relative',
-                width: '100%',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '48%',
                 height: '100%',
-                minHeight: '450px',
                 zIndex: 1,
-                borderRadius: '24px',
-                overflow: 'hidden',
                 display: 'none',
-                opacity: 0.95
+                pointerEvents: 'auto'
               }} className="hero-right-col">
                 <div 
                   style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
                   dangerouslySetInnerHTML={{
-                    __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%"></spline-viewer>'
+                    __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%" style="background:transparent"></spline-viewer>'
                   }}
                 />
               </div>
