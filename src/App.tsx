@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NumbersDashboard } from './components/NumbersDashboard';
 import { SeeSimulator } from './components/SeeSimulator';
 import { HumanRightsTimeline } from './components/HumanRightsTimeline';
@@ -8,34 +8,70 @@ import { ProductShowroom } from './components/ProductShowroom';
 import { CostParadox } from './components/CostParadox';
 import { AIShowroom } from './components/AIShowroom';
 import { GCLPProgram } from './components/GCLPProgram';
-import { ChevronDown, GraduationCap, Menu, X } from 'lucide-react';
+import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
 
 function App() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const TOTAL_SLIDES = 10;
+
   const navItems = [
-    { id: 'weg-em-numeros', label: '1. Números' },
-    { id: 'comportamento-consumidor-ux', label: '2. UX & TCO' },
-    { id: 'direitos-humanos', label: '3. Social' },
-    { id: 'estrategia-competitiva', label: '4. Estratégia' },
-    { id: 'etica-cidadania-sustentabilidade', label: '5. ESG' },
-    { id: 'gerenciamento-produtos-servicos-marcas', label: '6. Produtos' },
-    { id: 'gestao-estrategica-custos-formacao-precos', label: '7. Custos' },
-    { id: 'inteligencia-artificial-marketing', label: '8. I.A.' },
-    { id: 'proposta-intervencao-gclp', label: '9. GCLP' }
+    { index: 0, label: 'Capa' },
+    { index: 1, id: 'weg-em-numeros', label: '1. Números' },
+    { index: 2, id: 'comportamento-consumidor-ux', label: '2. UX & See+' },
+    { index: 3, id: 'direitos-humanos', label: '3. Social' },
+    { index: 4, id: 'estrategia-competitiva', label: '4. Estratégia' },
+    { index: 5, id: 'etica-cidadania-sustentabilidade', label: '5. ESG' },
+    { index: 6, id: 'gerenciamento-produtos-servicos-marcas', label: '6. Produtos' },
+    { index: 7, id: 'gestao-estrategica-custos-formacao-precos', label: '7. Custos' },
+    { index: 8, id: 'inteligencia-artificial-marketing', label: '8. I.A.' },
+    { index: 9, id: 'proposta-intervencao-gclp', label: '9. GCLP' }
   ];
 
+  // Keyboard Navigation: Left/Right arrow keys & Spacebar
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight' || event.key === 'Space') {
+        event.preventDefault();
+        setCurrentSlide((prev) => Math.min(prev + 1, TOTAL_SLIDES - 1));
+      } else if (event.key === 'ArrowLeft' || event.key === 'Backspace') {
+        event.preventDefault();
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setCurrentSlide((prev) => Math.min(prev + 1, TOTAL_SLIDES - 1));
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => Math.min(prev + 1, TOTAL_SLIDES - 1));
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%', overflowX: 'hidden' }}>
+    <div className="presentation-container">
       
-      {/* Floating Header */}
+      {/* Floating Presentation Header */}
       <header style={{
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
-        height: '70px',
-        background: 'rgba(3, 7, 18, 0.75)',
+        height: '75px',
+        background: 'rgba(3, 7, 18, 0.8)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
@@ -45,10 +81,10 @@ function App() {
         justifyContent: 'space-between',
         padding: '0 2rem'
       }}>
-        {/* Brand */}
+        {/* Brand with explicit WEG reference */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div style={{
-            fontSize: '1.15rem',
+            fontSize: '1.25rem',
             fontWeight: 800,
             fontFamily: 'var(--font-heading)',
             color: '#ffffff',
@@ -61,62 +97,64 @@ function App() {
           </div>
           <span style={{
             fontSize: '0.65rem',
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid rgba(59, 130, 246, 0.2)',
             padding: '0.2rem 0.5rem',
             borderRadius: '6px',
             fontFamily: 'var(--font-mono)',
-            color: 'var(--text-secondary)'
+            color: 'var(--primary-light)'
           }}>
             PIM III
           </span>
         </div>
 
-        {/* Desktop Nav */}
-        <nav style={{ display: 'none', gap: '0.5rem' }} className="desktop-nav-container">
+        {/* Desktop Presentation Nav */}
+        <nav style={{ display: 'none', gap: '0.35rem' }} className="desktop-nav-container">
           {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
+            <button
+              key={item.index}
+              onClick={() => {
+                setCurrentSlide(item.index);
+                setMobileMenuOpen(false);
+              }}
               style={{
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                textDecoration: 'none',
-                padding: '0.5rem 0.75rem',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                color: currentSlide === item.index ? '#ffffff' : 'var(--text-secondary)',
+                border: 'none',
+                background: currentSlide === item.index ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
+                outline: 'none',
+                padding: '0.45rem 0.75rem',
                 borderRadius: '8px',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#ffffff';
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-secondary)';
-                e.currentTarget.style.background = 'transparent';
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                fontFamily: 'var(--font-sans)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: currentSlide === item.index ? 'rgba(59, 130, 246, 0.3)' : 'transparent'
               }}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action / Mobile Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <span style={{
-            fontSize: '0.75rem',
+            fontSize: '0.7rem',
             background: 'rgba(16, 185, 129, 0.1)',
             border: '1px solid rgba(16, 185, 129, 0.2)',
             padding: '0.3rem 0.75rem',
             borderRadius: '20px',
             color: 'var(--success)',
             fontWeight: 700,
+            fontFamily: 'var(--font-mono)',
             display: 'none'
           }} className="vercel-badge">
-            VERCEL DEPLOY READY
+            DEPLOY SLIDES ACTIVE
           </span>
 
-          {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
@@ -135,11 +173,11 @@ function App() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Nav Drawer */}
       {mobileMenuOpen && (
         <div style={{
-          position: 'fixed',
-          top: '70px',
+          position: 'absolute',
+          top: '75px',
           left: 0,
           right: 0,
           bottom: 0,
@@ -148,223 +186,268 @@ function App() {
           padding: '2rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.25rem',
+          gap: '1rem',
           overflowY: 'auto'
         }}>
           {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              key={item.index}
+              onClick={() => {
+                setCurrentSlide(item.index);
+                setMobileMenuOpen(false);
+              }}
               style={{
-                fontSize: '1.1rem',
+                fontSize: '1rem',
                 fontWeight: 700,
-                color: '#ffffff',
-                textDecoration: 'none',
+                color: currentSlide === item.index ? 'var(--primary-light)' : '#ffffff',
+                border: 'none',
+                textAlign: 'left',
                 padding: '0.75rem 1rem',
                 borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1px solid rgba(255, 255, 255, 0.04)'
+                background: currentSlide === item.index ? 'rgba(59, 130, 246, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: currentSlide === item.index ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                cursor: 'pointer',
+                width: '100%'
               }}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </div>
       )}
 
-      {/* Hero Cinematic Cover */}
-      <section style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        padding: '0 2rem',
-        paddingTop: '70px',
-        textAlign: 'center',
-        background: 'radial-gradient(circle at 50% 30%, var(--primary-glow) 0%, transparent 60%)'
-      }}>
-        {/* Academic Badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          background: 'rgba(139, 92, 246, 0.1)',
-          border: '1px solid rgba(139, 92, 246, 0.25)',
-          padding: '0.4rem 1rem',
-          borderRadius: '30px',
-          color: 'var(--accent-purple)',
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          letterSpacing: '0.05em',
-          marginBottom: '2rem',
-          textTransform: 'uppercase',
-          animation: 'fadeIn 1s ease-out'
-        }}>
-          <GraduationCap size={16} />
-          Universidade Paulista • UNIP
-        </div>
-
-        {/* Title */}
-        <h1 style={{
-          fontSize: 'clamp(2.5rem, 6vw, 4.75rem)',
-          fontWeight: 800,
-          lineHeight: 1.1,
-          letterSpacing: '-0.03em',
-          maxWidth: '900px',
-          marginBottom: '1.5rem',
-          background: 'linear-gradient(to bottom, #ffffff 60%, var(--text-secondary) 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          animation: 'fadeIn 1.2s ease-out'
-        }}>
-          Aceleração Sustentável & Estratégica
-        </h1>
-
-        <p style={{
-          fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-          color: 'var(--text-secondary)',
-          maxWidth: '650px',
-          lineHeight: '1.6',
-          marginBottom: '3rem',
-          animation: 'fadeIn 1.4s ease-out'
-        }}>
-          Análise integrada multidisciplinar de marketing, finanças e inovação da **WEG S.A.** Um projeto interativo concebido sob a perspectiva acadêmica do PIM III.
-        </p>
-
-        {/* Interactive CTA Anchor */}
-        <a 
-          href="#weg-em-numeros"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            background: '#ffffff',
-            border: 'none',
-            color: '#030712',
-            padding: '0.85rem 1.75rem',
-            borderRadius: '12px',
-            fontSize: '0.95rem',
-            fontWeight: 700,
-            textDecoration: 'none',
-            boxShadow: '0 4px 20px rgba(255, 255, 255, 0.15)',
-            cursor: 'pointer',
-            transition: 'transform 0.2s',
-            animation: 'fadeIn 1.6s ease-out'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-        >
-          Explorar Apresentação <ChevronDown size={18} />
-        </a>
-
-        {/* Scroll Indicator details */}
-        <div style={{
-          position: 'absolute',
-          bottom: '2.5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.5rem',
-          color: 'var(--text-muted)',
-          fontSize: '0.75rem',
-          fontFamily: 'var(--font-mono)'
-        }}>
-          <span>SCROLL PARA NAVEGAR</span>
-          <ChevronDown size={14} style={{ animation: 'bounce 2s infinite' }} />
-        </div>
-      </section>
-
-      {/* Main Content Grid Wrapper */}
-      <main style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', padding: '0 2rem' }}>
-        
-        <NumbersDashboard />
-        
-        <SeeSimulator />
-        
-        <HumanRightsTimeline />
-        
-        <CompetitorMatrix />
-        
-        <ESGPillars />
-        
-        <ProductShowroom />
-        
-        <CostParadox />
-        
-        <AIShowroom />
-        
-        <GCLPProgram />
-
-      </main>
-
-      {/* Editorial Footer */}
-      <footer style={{
-        background: 'var(--bg-surface)',
-        borderTop: '1px solid var(--border-subtle)',
-        padding: '4rem 2rem',
-        textAlign: 'center',
-        marginTop: 'auto'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      {/* Fullscreen Slide Viewport Canvas */}
+      <div className="slide-canvas">
+        <div className="slide-active" key={currentSlide} style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '1.5rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-            paddingBottom: '2.5rem'
-          }}>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.25rem' }}>
-                WEG S.A. Interactive Pitch
-              </div>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                Projeto Integrado Multidisciplinar III • Universidade Paulista • 2025
-              </span>
-            </div>
-            
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <span style={{
+          {/* Cover Slide */}
+          {currentSlide === 0 && (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              padding: '2rem',
+              minHeight: '75vh',
+              background: 'radial-gradient(circle at 50% 30%, var(--primary-glow) 0%, transparent 65%)'
+            }}>
+              {/* WEG Official Slogan Reference */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'rgba(59, 130, 246, 0.1)',
+                border: '1px solid rgba(59, 130, 246, 0.25)',
+                padding: '0.4rem 1rem',
+                borderRadius: '30px',
+                color: 'var(--primary-light)',
                 fontSize: '0.75rem',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                marginBottom: '1.5rem',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-mono)'
+              }}>
+                WEG S.A. • LÍDER GLOBAL EM EFICIÊNCIA ENERGÉTICA
+              </div>
+
+              <h1 style={{
+                fontSize: 'clamp(2.5rem, 6.5vw, 4.5rem)',
+                fontWeight: 800,
+                lineHeight: 1.1,
+                letterSpacing: '-0.03em',
+                maxWidth: '950px',
+                marginBottom: '1.5rem',
+                background: 'linear-gradient(to bottom, #ffffff 60%, var(--text-secondary) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                Aceleração Sustentável & Estratégia
+              </h1>
+
+              <p style={{
+                fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
                 color: 'var(--text-secondary)',
-                background: 'rgba(255,255,255,0.03)',
-                padding: '0.5rem 1rem',
-                borderRadius: '8px',
-                border: '1px solid rgba(255,255,255,0.05)',
+                maxWidth: '650px',
+                lineHeight: '1.6',
+                marginBottom: '2.5rem'
+              }}>
+                Análise integrada multidisciplinar de marketing, finanças e inovação da **WEG S.A.** Projeto desenvolvido sob a estrutura curricular do PIM III da Universidade Paulista.
+              </p>
+
+              <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.75rem',
+                background: 'rgba(139, 92, 246, 0.08)',
+                border: '1px solid rgba(139, 92, 246, 0.18)',
+                padding: '0.5rem 1.25rem',
+                borderRadius: '12px',
+                color: 'var(--accent-purple)',
+                fontSize: '0.85rem',
+                fontWeight: 600
               }}>
-                <GraduationCap size={16} style={{ color: 'var(--accent-purple)' }} />
-                UNIP Marketing
-              </span>
+                <GraduationCap size={18} />
+                <span>Projeto Integrado Multidisciplinar III • UNIP Marketing</span>
+              </div>
+
+              {/* Navigation tip */}
+              <div style={{
+                position: 'absolute',
+                bottom: '1rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '0.35rem',
+                color: 'var(--text-muted)',
+                fontSize: '0.7rem',
+                fontFamily: 'var(--font-mono)'
+              }}>
+                <span>USE AS SETAS DO TECLADO PARA NAVEGAR ◄  ►</span>
+                <ChevronDown size={14} style={{ animation: 'bounce 2s infinite' }} />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div style={{
+          {/* Active slides matching PDF */}
+          {currentSlide === 1 && <NumbersDashboard />}
+          {currentSlide === 2 && <SeeSimulator />}
+          {currentSlide === 3 && <HumanRightsTimeline />}
+          {currentSlide === 4 && <CompetitorMatrix />}
+          {currentSlide === 5 && <ESGPillars />}
+          {currentSlide === 6 && <ProductShowroom />}
+          {currentSlide === 7 && <CostParadox />}
+          {currentSlide === 8 && <AIShowroom />}
+          {currentSlide === 9 && <GCLPProgram />}
+
+        </div>
+      </div>
+
+      {/* Floating Left Navigation Handle */}
+      {currentSlide > 0 && (
+        <button
+          onClick={handlePrev}
+          style={{
+            position: 'absolute',
+            left: '1rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'rgba(10, 15, 29, 0.6)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            color: '#ffffff',
+            width: '45px',
+            height: '45px',
+            borderRadius: '50%',
+            cursor: 'pointer',
             display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: '1rem',
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)'
-          }}>
-            <span>© 2026 Guilherme. Todos os direitos reservados. Projeto Acadêmico sem fins lucrativos.</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              Built with React &amp; CSS Modules for Vercel
-            </span>
-          </div>
+            justifyContent: 'center',
+            zIndex: 10,
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(59, 130, 246, 0.15)';
+            e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(10, 15, 29, 0.6)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+          }}
+        >
+          <ArrowLeft size={18} />
+        </button>
+      )}
 
+      {/* Floating Right Navigation Handle */}
+      {currentSlide < TOTAL_SLIDES - 1 && (
+        <button
+          onClick={handleNext}
+          style={{
+            position: 'absolute',
+            right: '1rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: 'rgba(10, 15, 29, 0.6)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            color: '#ffffff',
+            width: '45px',
+            height: '45px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10,
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(59, 130, 246, 0.15)';
+            e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(10, 15, 29, 0.6)';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+          }}
+        >
+          <ArrowRight size={18} />
+        </button>
+      )}
+
+      {/* Glowing Bottom Progress Bar & Pagination Indicator */}
+      <footer style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '50px',
+        background: 'rgba(3, 7, 18, 0.9)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 2.5rem',
+        zIndex: 98
+      }}>
+        {/* Progress percent line */}
+        <div style={{
+          position: 'absolute',
+          top: '-1px',
+          left: 0,
+          height: '2px',
+          background: 'linear-gradient(to right, var(--primary-light), var(--success))',
+          width: `${(currentSlide / (TOTAL_SLIDES - 1)) * 100}%`,
+          boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)',
+          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        }} />
+
+        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          <strong>WEG S.A.</strong> • PROJETO INTEGRADO MULTIDISCIPLINAR III
+        </div>
+
+        <div style={{
+          fontSize: '0.75rem',
+          fontWeight: 700,
+          color: 'var(--primary-light)',
+          fontFamily: 'var(--font-mono)',
+          background: 'rgba(59, 130, 246, 0.08)',
+          padding: '0.25rem 0.75rem',
+          borderRadius: '20px',
+          border: '1px solid rgba(59, 130, 246, 0.2)'
+        }}>
+          SLIDE {currentSlide + 1} DE {TOTAL_SLIDES}
         </div>
       </footer>
 
-      {/* Inject custom responsive layout styles directly */}
+      {/* Responsive and bounce selectors */}
       <style>{`
         @media (min-width: 1024px) {
           .desktop-nav-container {
@@ -378,8 +461,8 @@ function App() {
           }
         }
         @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(6px); }
+          0%, 100% { transform: translate(-50%, 0); }
+          50% { transform: translate(-50%, 6px); }
         }
       `}</style>
 
