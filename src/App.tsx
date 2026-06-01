@@ -226,7 +226,7 @@ function App() {
       {currentSlide === 0 && (
         <div style={{
           position: 'absolute',
-          top: '75px',
+          top: 0,
           right: 0,
           bottom: '50px',
           left: '55%',
