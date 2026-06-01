@@ -85,7 +85,7 @@ function App() {
       }}>
         {/* WEG Brand with Official Vector Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <WegLogo width={36} height={25} color="#004b93" />
+          <WegLogo width={36} height={25} color="#00579e" />
           <div style={{
             fontSize: '1.2rem',
             fontWeight: 800,
@@ -341,11 +341,13 @@ function App() {
                 display: 'none',
                 opacity: 0.95
               }} className="hero-right-col">
-                <div 
-                  style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
-                  dangerouslySetInnerHTML={{
-                    __html: '<spline-viewer url="https://prod.spline.design/S-vwCQ98FXF-VAIO/scene.splinecode"></spline-viewer>'
-                  }}
+                <iframe 
+                  src="https://my.spline.design/interactiverobotarm-WbI71wst4wRZehMOkhvnBJnC/" 
+                  frameBorder="0" 
+                  width="100%" 
+                  height="100%"
+                  style={{ border: 'none', background: 'transparent' }}
+                  title="Spline 3D Interactive Robot Arm"
                 />
               </div>
 
@@ -376,7 +378,7 @@ function App() {
               animation: 'fadeIn 0.4s ease-out'
             }}>
               
-              <WegLogo width={120} height={82} color="#004b93" className="glow-text-blue" />
+              <WegLogo width={120} height={82} color="#00579e" className="glow-text-blue" />
               
               <h1 style={{
                 fontSize: 'clamp(2rem, 5.5vw, 3.5rem)',

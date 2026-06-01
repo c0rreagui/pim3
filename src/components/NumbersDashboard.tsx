@@ -124,7 +124,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
 
 export const NumbersDashboard: React.FC = () => {
   return (
-    <section id="weg-em-numeros" style={{ padding: '4rem 2rem', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section id="weg-em-numeros" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader 
         tag="TÓPICO 1" 
         title="WEG em Números — 2025" 

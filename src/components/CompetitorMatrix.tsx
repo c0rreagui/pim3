@@ -12,7 +12,7 @@ export const CompetitorMatrix: React.FC = () => {
   const competitors = [
     {
       name: 'WEG S.A.',
-      logo: <WegLogo width={50} height={34} color="#004b93" />,
+      logo: <WegLogo width={50} height={34} color="#00579e" />,
       roic: '32,5%',
       strategy: 'Foco em hardware altamente verticalizado, controle total de insumos e manufatura de extrema eficiência (Estratégia Modular).',
       strength: 'Fios de cobre, chapas de aço silício e tintas protetivas fabricados internamente.'

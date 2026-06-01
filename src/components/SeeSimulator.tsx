@@ -62,7 +62,7 @@ export const SeeSimulator: React.FC = () => {
   const tenYearSavings = tcoData10Years[10].savings;
 
   return (
-    <section id="comportamento-consumidor-ux" style={{ padding: '4rem 2rem', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section id="comportamento-consumidor-ux" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader
         tag="TÓPICO 2"
         title="Comportamento do Consumidor & UX"

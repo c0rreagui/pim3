@@ -65,7 +65,7 @@ export const AIShowroom: React.FC = () => {
   };
 
   return (
-    <section id="inteligencia-artificial-marketing" style={{ padding: '4rem 2rem', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section id="inteligencia-artificial-marketing" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader
         tag="TÓPICO 8"
         title="Inteligência Artificial Aplicada ao Marketing"

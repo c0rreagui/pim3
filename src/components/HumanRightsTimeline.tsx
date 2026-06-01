@@ -14,7 +14,7 @@ export const HumanRightsTimeline: React.FC = () => {
   ] as const;
 
   return (
-    <section id="direitos-humanos" style={{ padding: '4rem 2rem', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section id="direitos-humanos" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader
         tag="TÓPICO 3"
         title="Direitos Humanos & Governança Social"

@@ -4,53 +4,74 @@ interface WegLogoProps {
   width?: number | string;
   height?: number | string;
   color?: string;
-  letterColor?: string;
   className?: string;
 }
 
 export const WegLogo: React.FC<WegLogoProps> = ({
   width = 120,
   height = 80,
-  color = '#004b93',
-  letterColor,
+  color = '#00579e',
   className = ''
 }) => {
-  // Dynamically contrast letter color if not explicitly provided
-  const finalLetterColor = letterColor 
-    ? letterColor 
-    : (color === '#ffffff' || color === 'white' ? '#030712' : '#ffffff');
-
   return (
     <svg 
       width={width} 
       height={height} 
-      viewBox="0 0 100 68" 
+      viewBox="0 0 150 90" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={{ display: 'inline-block', verticalAlign: 'middle', borderRadius: '4px' }}
+      style={{ display: 'inline-block', verticalAlign: 'middle' }}
     >
-      {/* Outer block paths representing the official geometric WEG logo */}
-      <path 
-        d="M 0 0 L 100 0 L 100 68 L 0 68 Z" 
-        fill={color} 
-      />
-      {/* Inner space lines that form the letters "weg" */}
-      {/* Letter W paths */}
-      <path 
-        d="M 12 12 L 19 12 L 19 46 L 25 46 L 25 12 L 32 12 L 32 46 L 38 46 L 38 12 L 45 12 L 45 56 L 12 56 Z" 
-        fill={finalLetterColor} 
-      />
-      {/* Letter E paths */}
-      <path 
-        d="M 51 12 L 67 12 L 67 21 L 58 21 L 58 29 L 66 29 L 66 38 L 58 38 L 58 47 L 67 47 L 67 56 L 51 56 Z" 
-        fill={finalLetterColor} 
-      />
-      {/* Letter G paths */}
-      <path 
-        d="M 72 12 L 88 12 L 88 29 L 80 29 L 80 21 L 79 21 L 79 47 L 88 47 L 88 38 L 82 38 L 82 29 L 95 29 L 95 56 L 72 56 Z" 
-        fill={finalLetterColor} 
-      />
+      {/* 
+        Official Geometric WEG Logo Grid Representation (15x9 Grid)
+        Each cell unit is 10x10 pixels.
+        Color represents the corporate WEG Blue (or theme color).
+      */}
+      
+      {/* 1. Top border horizontal line (Row 0, Cols 0 to 13) */}
+      <rect x="0" y="0" width="140" height="10" fill={color} />
+      
+      {/* 2. Left border vertical line (Col 0, Rows 1 to 6) - stops before Row 7 (the gap) */}
+      <rect x="0" y="10" width="10" height="50" fill={color} />
+      
+      {/* 3. Bottom border horizontal line (Row 8, Cols 0 to 14) */}
+      <rect x="0" y="80" width="150" height="10" fill={color} />
+      
+      {/* 4. Right border & G right line vertical connector (Col 14, Rows 2 to 7) */}
+      <rect x="140" y="20" width="10" height="60" fill={color} />
+
+      {/* --- LETTER W --- */}
+      {/* W Leg 1 (Col 2) */}
+      <rect x="20" y="20" width="10" height="50" fill={color} />
+      {/* W Leg 2 (Col 4) */}
+      <rect x="40" y="20" width="10" height="50" fill={color} />
+      {/* W Leg 3 (Col 6) */}
+      <rect x="60" y="20" width="10" height="50" fill={color} />
+      {/* W Bottom Connector (Cols 2 to 6, Row 6) */}
+      <rect x="20" y="60" width="50" height="10" fill={color} />
+
+      {/* --- LETTER E --- */}
+      {/* E Back vertical (Col 8) */}
+      <rect x="80" y="20" width="10" height="50" fill={color} />
+      {/* E Top horizontal bar (Row 2, Cols 9 to 10) */}
+      <rect x="90" y="20" width="20" height="10" fill={color} />
+      {/* E Middle horizontal bar (Row 4, Cols 9 to 10) */}
+      <rect x="90" y="40" width="20" height="10" fill={color} />
+      {/* E Bottom horizontal bar (Row 6, Cols 9 to 10) */}
+      <rect x="90" y="60" width="20" height="10" fill={color} />
+
+      {/* --- LETTER G --- */}
+      {/* G Left vertical (Col 12) */}
+      <rect x="110" y="20" width="10" height="50" fill={color} />
+      {/* G Top horizontal bar (Row 2, Cols 13 to 14) */}
+      <rect x="120" y="20" width="30" height="10" fill={color} />
+      {/* G Middle horizontal bar (Row 4, Cols 13 to 14) */}
+      <rect x="120" y="40" width="20" height="10" fill={color} />
+      {/* G Bottom horizontal bar (Row 6, Cols 13 to 14) */}
+      <rect x="120" y="60" width="30" height="10" fill={color} />
+      {/* G Right vertical bar (Col 14, Rows 3 to 5) - connects with G's top/bottom and right border */}
+      <rect x="140" y="30" width="10" height="30" fill={color} />
     </svg>
   );
 };

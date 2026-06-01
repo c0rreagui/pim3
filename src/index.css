@@ -2,13 +2,13 @@
 
 :root {
   /* Color Palette - Premium Dark-First */
-  --bg-deep: #030712;         /* Cinematic dark background */
-  --bg-surface: #0a0f1d;      /* Card / surface background */
-  --bg-surface-hover: #111827;
+  --bg-deep: #050811;         /* Cold metallic slate dark background */
+  --bg-surface: #0a0f24;      /* Card / surface background */
+  --bg-surface-hover: #101732;
   
-  --primary: #004b93;         /* Official WEG Blue */
-  --primary-glow: rgba(0, 75, 147, 0.15);
-  --primary-light: #3b82f6;   /* Electric Blue accent */
+  --primary: #00579e;         /* Official WEG Blue */
+  --primary-glow: rgba(0, 87, 158, 0.18);
+  --primary-light: #0088ff;   /* Brilliant WEG Electric Blue accent */
   
   --success: #10b981;         /* Sustainability Emerald Green */
   --success-glow: rgba(16, 185, 129, 0.15);
@@ -17,15 +17,15 @@
   --accent-purple: #8b5cf6;   /* Technology Purple */
   
   --text-primary: #f9fafb;    /* High contrast text */
-  --text-secondary: #9ca3af;  /* Muted metadata */
-  --text-muted: #6b7280;     /* Placeholder / subtle */
+  --text-secondary: #94a3b8;  /* Metallic Muted Gray text */
+  --text-muted: #64748b;     /* Slate Placeholder / subtle */
   
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(59, 130, 246, 0.4);
+  --border-active: rgba(0, 136, 255, 0.4);
   
-  --glass-bg: rgba(10, 15, 29, 0.7);
+  --glass-bg: rgba(10, 15, 36, 0.75);
   --glass-border: rgba(255, 255, 255, 0.06);
-  --glass-shadow: rgba(0, 0, 0, 0.6);
+  --glass-shadow: rgba(0, 0, 0, 0.65);
   
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

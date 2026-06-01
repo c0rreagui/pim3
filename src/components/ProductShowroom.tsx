@@ -33,7 +33,7 @@ export const ProductShowroom: React.FC = () => {
   ];
 
   return (
-    <section id="gerenciamento-produtos-servicos-marcas" style={{ padding: '4rem 2rem', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section id="gerenciamento-produtos-servicos-marcas" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
       <SectionHeader
         tag="TÓPICO 6"
         title="Gerenciamento de Produtos, Serviços e Marcas"
