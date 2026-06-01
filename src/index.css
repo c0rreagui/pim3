@@ -199,3 +199,12 @@ button, input, select {
   box-shadow: 0 12px 40px 0 rgba(0, 87, 158, 0.2);
   transform: translateY(-2px);
 }
+
+/* Force Spline viewer to fill its container completely */
+.hero-spline-overlay,
+.hero-spline-overlay > div,
+.hero-spline-overlay spline-viewer {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
