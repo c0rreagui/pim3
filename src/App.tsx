@@ -222,7 +222,7 @@ function App() {
         </div>
       )}
 
-      {/* 3D Robot Arm: viewport-level overlay, only on cover slide */}
+      {/* 3D Robot Arm: viewport-level overlay with updated texture (ry6aYkpkn76CYg4N) */}
       {currentSlide === 0 && (
         <div style={{
           position: 'absolute',
