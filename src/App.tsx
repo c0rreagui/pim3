@@ -226,9 +226,9 @@ function App() {
       {currentSlide === 0 && (
         <div style={{
           position: 'absolute',
-          top: 0,
+          top: '80px',
           right: 0,
-          bottom: '50px',
+          bottom: 0,
           left: '55%',
           zIndex: 3,
           pointerEvents: 'auto',
