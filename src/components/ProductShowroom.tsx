@@ -143,8 +143,10 @@ export const ProductShowroom: React.FC = () => {
               <h4 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: '#ffffff' }}>
                 Rejuvenescimento Estruturado do Portfólio
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-                Para evitar a obsolescência e proteger margens no mercado externo, a WEG classifica os motores <strong>IE2 / IE3 em fase de maturidade</strong> de ciclo de vida. O foco comercial e investimentos da companhia são inteiramente direcionados aos inovadores motores **IE5 / IE6** e à plataforma digital integrada **WEG Motion Fleet Management**, atendendo mercados regulatórios de altíssima exigência técnica como a União Europeia e os EUA.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Maturidade (IE2 / IE3):</strong> Classificados em fase madura de ciclo de vida, com substituição ativa por troca programada.<br/>
+                • <strong style={{ color: 'var(--primary-light)' }}>Inovação (IE5 / IE6):</strong> Foco total de novos investimentos comerciais e desenvolvimento para eficiência energética extrema.<br/>
+                • <strong style={{ color: '#ffffff' }}>Servitização (Motion Fleet Management):</strong> Telemetria em nuvem para atender regulamentos técnicos da UE e EUA.
               </p>
             </div>
 
@@ -202,8 +204,9 @@ export const ProductShowroom: React.FC = () => {
               <h4 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff' }}>
                 Conexão com a Nova Geração de Consumidores
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-                Como estratégia para diversificar riscos do mercado puramente industrial e rejuvenescer a marca perante a sociedade civil, a WEG expande seu portfólio para o segmento residencial B2C. A **linha W-Eco** é o vetor dessa mudança, levando a confiabilidade industrial para dentro dos lares de forma altamente sustentável.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Extensão de Marca:</strong> Diversificação inteligente de riscos industriais migrando ativamente para o B2C residencial.<br/>
+                • <strong style={{ color: 'var(--success)' }}>Linha W-Eco:</strong> Vetor de inovação que leva a alta confiabilidade industrial para dentro do lar moderno com foco na descarbonização.
               </p>
             </div>
 

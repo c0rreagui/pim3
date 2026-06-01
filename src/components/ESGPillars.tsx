@@ -241,7 +241,7 @@ export const ESGPillars: React.FC = () => {
                       Auditoria Científica
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                      Passe o mouse ou toque nos pontos do gráfico para revelar os detalhes operacionais de cada marco de emissões da WEG validados pela **SBTi**.
+                      Passe o mouse ou toque nos pontos do gráfico para revelar os detalhes operacionais de cada marco de emissões da WEG validados pela <strong style={{ color: '#ffffff' }}>SBTi</strong>.
                     </span>
                   </div>
                 ) : hoveredPoint === 'current' ? (

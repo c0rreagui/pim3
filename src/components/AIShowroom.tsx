@@ -81,25 +81,27 @@ export const AIShowroom: React.FC = () => {
       }}>
         {/* Texts */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
-          <div className="glass-panel" style={{ padding: '1.75rem' }}>
-            <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Eye size={18} style={{ color: 'var(--primary-light)' }} />
-              Visão Computacional: WEGvision.AI
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-              Em parceria com a Intel, a WEG desenvolveu o <strong>WEGvision.AI</strong>, um sistema autônomo de visão computacional embarcado nas esteiras de produção. Aplicado em indústrias de cimento B2B, a IA monitora a esteira em alta velocidade e **detecta sacos rasgados** instantaneamente, elevando a **eficiência geral de ensaque em 4%** ao evitar paradas e perdas de material.
-            </p>
-          </div>
+            <div className="glass-panel" style={{ padding: '1.75rem' }}>
+              <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Eye size={18} style={{ color: 'var(--primary-light)' }} />
+                Visão Computacional: WEGvision.AI
+              </h4>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Monitoramento Inteligente:</strong> Desenvolvido com a Intel, atua como sistema de visão computacional autônomo nas esteiras B2B.<br/>
+                • <strong style={{ color: 'var(--primary-light)' }}>Zero Desperdício:</strong> Detecta sacos rasgados em alta velocidade, elevando a <strong style={{ color: 'var(--success)' }}>eficiência de ensaque em 4%</strong>.
+              </p>
+            </div>
 
-          <div className="glass-panel" style={{ padding: '1.75rem' }}>
-            <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Radio size={18} style={{ color: 'var(--primary-light)' }} />
-              CRM Preditivo Conectado ao IoT
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-              Os sensores inteligentes <strong>WEGscan</strong> monitoram vibração triaxial e temperatura diretamente na carcaça do motor em campo. Quando a IA em nuvem identifica anomalias ou degradação de rolamentos, ela se comunica diretamente com o **CRM da WEG**, disparando automaticamente campanhas hiperpersonalizadas e ofertas de troca técnica antes que o cliente sofra uma parada forçada.
-            </p>
-          </div>
+            <div className="glass-panel" style={{ padding: '1.75rem' }}>
+              <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Radio size={18} style={{ color: 'var(--primary-light)' }} />
+                CRM Preditivo Conectado ao IoT
+              </h4>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Sensores WEGscan:</strong> Monitoramento contínuo de temperatura e vibração triaxial diretamente em campo.<br/>
+                • <strong style={{ color: 'var(--primary-light)' }}>Ação Preditiva:</strong> Anomalias detectadas em nuvem acionam o <strong style={{ color: '#ffffff' }}>CRM da WEG</strong> para disparar campanhas de troca personalizadas antes de uma parada inesperada.
+              </p>
+            </div>
         </div>
 
         {/* Dynamic AI Showroom Box */}

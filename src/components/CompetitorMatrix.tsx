@@ -100,18 +100,20 @@ export const CompetitorMatrix: React.FC = () => {
                 <ShieldCheck size={16} style={{ color: 'var(--primary-light)' }} />
                 Verticalização como Defesa Operacional
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: '1.5' }}>
-                Para se blindar contra quebras de cadeias logísticas externas, a **WEG fabrica internamente seus fios de cobre, chapas de aço silício e tintas protetivas**. Esse domínio completo de insumos protege a produção contra flutuações e garante um **ROIC extraordinário de 32,5%** da WEG vs. **17,8% (ROCE)** da Siemens.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Autossuficiência Máxima:</strong> A WEG fabrica internamente seus fios de cobre, chapas de aço silício e tintas protetivas.<br/>
+                • <strong style={{ color: 'var(--primary-light)' }}>Eficiência Extrema:</strong> Esse domínio blinda a logística e assegura um <strong style={{ color: 'var(--success)' }}>ROIC extraordinário de 32,5%</strong> (vs. 17,8% ROCE da Siemens).
               </p>
             </div>
 
             <div className="glass-panel" style={{ padding: '1.25rem' }}>
               <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Shuffle size={16} style={{ color: 'var(--primary-light)' }} />
-                M&amp;A Regal Rexnord & Teoria dos Jogos
+                M&amp;A Regal Rexnord &amp; Teoria dos Jogos
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: '1.5' }}>
-                Em 2024, a WEG adquiriu a divisão de motores e geradores da **Regal Rexnord por ~US$ 400 milhões**, consolidando posições fabris cruciais nos EUA, México e China. A transação opera em um **Equilíbrio de Nash de concorrência não destrutiva**, onde a WEG absorve ativos físicos estratégicos sem desatar guerras tarifárias de preços com rivais ocidentais.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Expansão de Impacto:</strong> Aquisição da divisão da <strong style={{ color: 'var(--primary-light)' }}>Regal Rexnord por ~US$ 400M</strong> em 2024, garantindo fábricas nos EUA, México e China.<br/>
+                • <strong style={{ color: '#ffffff' }}>Equilíbrio de Nash:</strong> Absorção estratégica de ativos sem iniciar guerras tarifárias de preços com competidores ocidentais.
               </p>
             </div>
           </div>

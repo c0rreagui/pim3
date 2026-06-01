@@ -96,11 +96,12 @@ export const CostParadox: React.FC = () => {
           {/* TCO Paradox */}
           <div className="glass-panel" style={{ padding: '1.25rem', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem' }}>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>
                 Precificação Baseada no Paradoxo do TCO
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: '1.4' }}>
-                A WEG S.A. adota a precificação baseada em valor (**Value-Based Pricing**). O preço premium é sustentado pelo fato de que o motor elétrico representa apenas **5% a 10% do TCO** vitalício. Os outros **90% a 95% do custo** referem-se à energia elétrica gasta em sua operação.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: 'var(--success)' }}>Value-Based Pricing:</strong> A WEG cobra um preço premium justificado pela eficiência extrema e durabilidade.<br/>
+                • <strong style={{ color: '#ffffff' }}>Paradoxo do TCO:</strong> O valor de aquisição do motor representa apenas <strong style={{ color: '#ffffff' }}>5% a 10%</strong> do seu custo total de propriedade (TCO). Os outros <strong style={{ color: 'var(--success)' }}>90% a 95%</strong> referem-se à energia elétrica consumida durante sua operação vitalícia.
               </p>
             </div>
 

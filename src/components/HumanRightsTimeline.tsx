@@ -149,8 +149,9 @@ export const HumanRightsTimeline: React.FC = () => {
                 <Briefcase size={24} />
                 <h4 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff' }}>Relações Trabalhistas de Excelência</h4>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7' }}>
-                A harmonia trabalhista é um valor inegociável na WEG. Atualmente, **95% da força global** é amparada por acordos sindicais estruturados. Além disso, a companhia garante a **igualdade salarial rigorosa entre gêneros** para as mesmas funções e disponibiliza **licença-maternidade de 120 dias**, valorizando o equilíbrio de vida e carreira.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Representatividade Coletiva:</strong> Atualmente, <strong style={{ color: 'var(--accent-purple)' }}>95% da força global</strong> é amparada por acordos sindicais sólidos.<br/>
+                • <strong style={{ color: '#ffffff' }}>Equidade e Apoio:</strong> Igualdade salarial rigorosa entre gêneros para mesmas funções e licença-maternidade de <strong style={{ color: '#ffffff' }}>120 dias</strong>.
               </p>
               <div style={{
                 display: 'grid',
@@ -176,8 +177,9 @@ export const HumanRightsTimeline: React.FC = () => {
                 <Award size={24} />
                 <h4 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff' }}>Combate ao Racismo & Inclusão Racial</h4>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7' }}>
-                O programa **WEG pela Igualdade Racial** estabelece metas diretas para a ampliação da representatividade: elevar a presença de pessoas negras em cargos de liderança para **30% até 2027**. A empresa conduz processos de recrutamento afirmativo dedicados a profissionais negros, trilhas de desenvolvimento estruturadas para aceleração de talentos pretos, treinamento antirracista de caráter mandatório para líderes e equipes seletivas, além de auditorias trimestrais de metas.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#ffffff' }}>Igualdade em Foco:</strong> O programa <strong style={{ color: 'var(--accent-purple)' }}>WEG pela Igualdade Racial</strong> busca elevar a liderança negra para <strong style={{ color: '#ffffff' }}>30% até 2027</strong>.<br/>
+                • <strong style={{ color: '#ffffff' }}>Processos Afirmativos:</strong> Recrutamento dedicado, trilhas de aceleração de talentos pretos, treinamento antirracista mandatório e auditorias de progresso trimestrais.
               </p>
               
               <div style={{

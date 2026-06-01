@@ -196,7 +196,7 @@ export const NumbersDashboard: React.FC = () => {
             A Força do Faturamento Sustentável
           </h4>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-            A WEG direciona seu portfólio estrategicamente para o futuro. Hoje, **71% de sua receita operacional** é proveniente de produtos de descarbonização e eficiência energética. Isso significa que investir em inovação na WEG é indissociável de gerar impacto ecológico positivo.
+            A WEG direciona seu portfólio estrategicamente para o futuro sustentável. Hoje, <strong style={{ color: '#ffffff' }}>71% da receita operacional</strong> da companhia vem de produtos de descarbonização e eficiência energética. Na WEG, o crescimento e o <strong style={{ color: 'var(--success)' }}>impacto ecológico positivo</strong> andam sempre juntos.
           </p>
           <div style={{
             display: 'flex',

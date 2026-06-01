@@ -89,8 +89,9 @@ export const GCLPProgram: React.FC = () => {
                 <Milestone size={16} style={{ color: '#ef4444' }} />
                 O Problema: Barreiras &amp; Escopo 3
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: '1.5' }}>
-                As emissões de **Escopo 3** representam até **85% do impacto ecológico** de bens de capital. Trazer carcaças de motores pesados de volta para reciclagem no Brasil enfrenta barreiras aduaneiras e altos custos logísticos globais.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • As emissões de <strong style={{ color: '#ffffff' }}>Escopo 3</strong> representam até <strong style={{ color: '#f87171' }}>85% do impacto ecológico</strong> de bens de capital.<br/>
+                • O retorno físico de motores pesados para reciclagem no Brasil enfrenta <strong style={{ color: '#ffffff' }}>barreiras alfandegárias</strong> e <strong style={{ color: '#ffffff' }}>altos custos logísticos globais</strong>.
               </p>
             </div>
 
@@ -99,8 +100,9 @@ export const GCLPProgram: React.FC = () => {
                 <RefreshCw size={16} style={{ color: 'var(--success)' }} />
                 A Solução: Fundições Verdes Locais
               </h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: '1.5' }}>
-                O programa **GCLP** propõe o uso de tags **RFID** nas carcaças de motores e uma plataforma baseada em **Blockchain**. A WEG direciona os descartes a fundições locais parceiras nas principais regiões econômicas, reciclando os metais regionalmente e emitindo tokens de crédito de carbono em tempo real ao cliente.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0 }}>
+                • <strong style={{ color: '#34d399' }}>GCLP:</strong> Rastreabilidade avançada via tags <strong style={{ color: '#ffffff' }}>RFID</strong> e validação segura em <strong style={{ color: '#ffffff' }}>Blockchain</strong>.<br/>
+                • <strong style={{ color: '#ffffff' }}>Descentralização:</strong> Parceria com <strong style={{ color: '#ffffff' }}>fundições verdes locais</strong> para reciclar metais regionalmente, emitindo créditos de carbono rápidos para o cliente.
               </p>
             </div>
           </div>
