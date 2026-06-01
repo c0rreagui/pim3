@@ -8,13 +8,14 @@ import { ProductShowroom } from './components/ProductShowroom';
 import { CostParadox } from './components/CostParadox';
 import { AIShowroom } from './components/AIShowroom';
 import { GCLPProgram } from './components/GCLPProgram';
-import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { WegLogo } from './components/WegLogo';
+import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const TOTAL_SLIDES = 10;
+  const TOTAL_SLIDES = 11;
 
   const navItems = [
     { index: 0, label: 'Capa' },
@@ -26,10 +27,11 @@ function App() {
     { index: 6, id: 'gerenciamento-produtos-servicos-marcas', label: '6. Produtos' },
     { index: 7, id: 'gestao-estrategica-custos-formacao-precos', label: '7. Custos' },
     { index: 8, id: 'inteligencia-artificial-marketing', label: '8. I.A.' },
-    { index: 9, id: 'proposta-intervencao-gclp', label: '9. GCLP' }
+    { index: 9, id: 'proposta-intervencao-gclp', label: '9. GCLP' },
+    { index: 10, label: 'Fim' }
   ];
 
-  // Keyboard Navigation: Left/Right arrow keys & Spacebar
+  // Keyboard Navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowRight' || event.key === 'Space') {
@@ -64,7 +66,7 @@ function App() {
   return (
     <div className="presentation-container">
       
-      {/* Floating Presentation Header */}
+      {/* Floating Header */}
       <header style={{
         position: 'absolute',
         top: 0,
@@ -81,19 +83,19 @@ function App() {
         justifyContent: 'space-between',
         padding: '0 2rem'
       }}>
-        {/* Brand with explicit WEG reference */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* WEG Brand with Official Vector Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <WegLogo width={36} height={25} color="#004b93" />
           <div style={{
-            fontSize: '1.25rem',
+            fontSize: '1.2rem',
             fontWeight: 800,
             fontFamily: 'var(--font-heading)',
             color: '#ffffff',
             letterSpacing: '-0.02em',
             display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
+            alignItems: 'center'
           }}>
-            <span style={{ color: 'var(--primary-light)' }}>WEG</span> S.A.
+            WEG S.A.
           </div>
           <span style={{
             fontSize: '0.65rem',
@@ -102,14 +104,15 @@ function App() {
             padding: '0.2rem 0.5rem',
             borderRadius: '6px',
             fontFamily: 'var(--font-mono)',
-            color: 'var(--primary-light)'
+            color: 'var(--primary-light)',
+            marginLeft: '0.25rem'
           }}>
             PIM III
           </span>
         </div>
 
         {/* Desktop Presentation Nav */}
-        <nav style={{ display: 'none', gap: '0.35rem' }} className="desktop-nav-container">
+        <nav style={{ display: 'none', gap: '0.25rem' }} className="desktop-nav-container">
           {navItems.map((item) => (
             <button
               key={item.index}
@@ -118,13 +121,13 @@ function App() {
                 setMobileMenuOpen(false);
               }}
               style={{
-                fontSize: '0.75rem',
+                fontSize: '0.72rem',
                 fontWeight: 700,
                 color: currentSlide === item.index ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
                 background: currentSlide === item.index ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
                 outline: 'none',
-                padding: '0.45rem 0.75rem',
+                padding: '0.4rem 0.65rem',
                 borderRadius: '8px',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
@@ -186,7 +189,7 @@ function App() {
           padding: '2rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1rem',
+          gap: '0.75rem',
           overflowY: 'auto'
         }}>
           {navItems.map((item) => (
@@ -202,7 +205,7 @@ function App() {
                 color: currentSlide === item.index ? 'var(--primary-light)' : '#ffffff',
                 border: 'none',
                 textAlign: 'left',
-                padding: '0.75rem 1rem',
+                padding: '0.6rem 1rem',
                 borderRadius: '10px',
                 background: currentSlide === item.index ? 'rgba(59, 130, 246, 0.08)' : 'rgba(255, 255, 255, 0.02)',
                 borderWidth: '1px',
@@ -222,95 +225,130 @@ function App() {
       <div className="slide-canvas">
         <div className="slide-active" key={currentSlide} style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           
-          {/* Cover Slide */}
+          {/* Cover Slide (0) */}
           {currentSlide === 0 && (
             <div style={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: 'grid',
+              gridTemplateColumns: '1fr',
               alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              padding: '2rem',
+              position: 'relative',
+              width: '100%',
               minHeight: '75vh',
-              background: 'radial-gradient(circle at 50% 30%, var(--primary-glow) 0%, transparent 65%)'
-            }}>
-              {/* WEG Official Slogan Reference */}
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: 'rgba(59, 130, 246, 0.1)',
-                border: '1px solid rgba(59, 130, 246, 0.25)',
-                padding: '0.4rem 1rem',
-                borderRadius: '30px',
-                color: 'var(--primary-light)',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                marginBottom: '1.5rem',
-                textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono)'
-              }}>
-                WEG S.A. • LÍDER GLOBAL EM EFICIÊNCIA ENERGÉTICA
+              gap: '2rem'
+            }} className="hero-slide-grid">
+              
+              {/* Left Column: Text & Content */}
+              <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 2, position: 'relative' }} className="hero-left-col">
+                {/* WEG Slogan */}
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  background: 'rgba(59, 130, 246, 0.1)',
+                  border: '1px solid rgba(59, 130, 246, 0.25)',
+                  padding: '0.4rem 1rem',
+                  borderRadius: '30px',
+                  color: 'var(--primary-light)',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  marginBottom: '1.25rem',
+                  textTransform: 'uppercase',
+                  width: 'fit-content',
+                  fontFamily: 'var(--font-mono)'
+                }}>
+                  WEG S.A. • TECNOLOGIA PARA UM FUTURO SUSTENTÁVEL
+                </div>
+
+                <h1 style={{
+                  fontSize: 'clamp(2.2rem, 5.5vw, 4rem)',
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  letterSpacing: '-0.03em',
+                  maxWidth: '750px',
+                  marginBottom: '1.25rem',
+                  background: 'linear-gradient(to bottom, #ffffff 60%, var(--text-secondary) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>
+                  Aceleração Sustentável & Estratégia
+                </h1>
+
+                <p style={{
+                  fontSize: 'clamp(0.95rem, 2vw, 1.15rem)',
+                  color: 'var(--text-secondary)',
+                  maxWidth: '580px',
+                  lineHeight: '1.6',
+                  marginBottom: '2rem'
+                }}>
+                  Análise integrada multidisciplinar em marketing, custos e inovação tecnológica sobre a **WEG S.A.** Concebido para a banca examinadora do PIM III da Universidade Paulista.
+                </p>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: 'rgba(139, 92, 246, 0.08)',
+                    border: '1px solid rgba(139, 92, 246, 0.18)',
+                    padding: '0.5rem 1.25rem',
+                    borderRadius: '12px',
+                    color: 'var(--accent-purple)',
+                    fontSize: '0.82rem',
+                    fontWeight: 600
+                  }}>
+                    <GraduationCap size={16} />
+                    <span>UNIP • PIM III • Marketing Industrial</span>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={handleNext}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: '#ffffff',
+                    border: 'none',
+                    color: '#030712',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '12px',
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    width: 'fit-content',
+                    boxShadow: '0 4px 20px rgba(255, 255, 255, 0.12)',
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s',
+                    pointerEvents: 'auto'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                  onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                >
+                  Iniciar Apresentação <ChevronDown size={16} />
+                </button>
               </div>
 
-              <h1 style={{
-                fontSize: 'clamp(2.5rem, 6.5vw, 4.5rem)',
-                fontWeight: 800,
-                lineHeight: 1.1,
-                letterSpacing: '-0.03em',
-                maxWidth: '950px',
-                marginBottom: '1.5rem',
-                background: 'linear-gradient(to bottom, #ffffff 60%, var(--text-secondary) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-                Aceleração Sustentável & Estratégia
-              </h1>
-
-              <p style={{
-                fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                color: 'var(--text-secondary)',
-                maxWidth: '650px',
-                lineHeight: '1.6',
-                marginBottom: '2.5rem'
-              }}>
-                Análise integrada multidisciplinar de marketing, finanças e inovação da **WEG S.A.** Projeto desenvolvido sob a estrutura curricular do PIM III da Universidade Paulista.
-              </p>
-
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                background: 'rgba(139, 92, 246, 0.08)',
-                border: '1px solid rgba(139, 92, 246, 0.18)',
-                padding: '0.5rem 1.25rem',
-                borderRadius: '12px',
-                color: 'var(--accent-purple)',
-                fontSize: '0.85rem',
-                fontWeight: 600
-              }}>
-                <GraduationCap size={18} />
-                <span>Projeto Integrado Multidisciplinar III • UNIP Marketing</span>
-              </div>
-
-              {/* Navigation tip */}
+              {/* Right Column: 3D Robot Hand Spline Embed */}
               <div style={{
                 position: 'absolute',
-                bottom: '1rem',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.35rem',
-                color: 'var(--text-muted)',
-                fontSize: '0.7rem',
-                fontFamily: 'var(--font-mono)'
-              }}>
-                <span>USE AS SETAS DO TECLADO PARA NAVEGAR ◄  ►</span>
-                <ChevronDown size={14} style={{ animation: 'bounce 2s infinite' }} />
+                top: '-40px',
+                right: '-40px',
+                width: '50%',
+                height: '110%',
+                zIndex: 1,
+                borderRadius: '24px',
+                overflow: 'hidden',
+                display: 'none',
+                opacity: 0.95
+              }} className="hero-right-col">
+                <div 
+                  style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
+                  dangerouslySetInnerHTML={{
+                    __html: '<spline-viewer url="https://prod.spline.design/S-vwCQ98FXF-VAIO/scene.splinecode"></spline-viewer>'
+                  }}
+                />
               </div>
+
             </div>
           )}
 
@@ -324,6 +362,89 @@ function App() {
           {currentSlide === 7 && <CostParadox />}
           {currentSlide === 8 && <AIShowroom />}
           {currentSlide === 9 && <GCLPProgram />}
+
+          {/* Slide 10: Finalização / Encerramento */}
+          {currentSlide === 10 && (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              padding: '2rem',
+              minHeight: '75vh',
+              animation: 'fadeIn 0.4s ease-out'
+            }}>
+              
+              <WegLogo width={120} height={82} color="#004b93" className="glow-text-blue" />
+              
+              <h1 style={{
+                fontSize: 'clamp(2rem, 5.5vw, 3.5rem)',
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                marginTop: '1.5rem',
+                marginBottom: '1rem',
+                background: 'linear-gradient(to bottom, #ffffff, var(--text-secondary))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                Agradecemos a Atenção
+              </h1>
+
+              {/* WEG S.A. Mission */}
+              <p style={{
+                fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+                color: 'var(--text-secondary)',
+                maxWidth: '650px',
+                lineHeight: '1.6',
+                fontStyle: 'italic',
+                marginBottom: '2.5rem'
+              }}>
+                "Transformar energia em soluções eficientes, limpas e inteligentes para o desenvolvimento sustentável global, unindo confiabilidade industrial a responsabilidade ambiental."
+              </p>
+
+              {/* Academic Credits */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '1.5rem',
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                padding: '1.5rem 2.5rem',
+                borderRadius: '16px',
+                maxWidth: '700px',
+                width: '100%',
+                textAlign: 'left'
+              }}>
+                <div>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Autor / CTO</span>
+                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>Guilherme</span>
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Instituição</span>
+                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>Universidade Paulista (UNIP)</span>
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Estrutura de Projeto</span>
+                  <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary-light)' }}>PIM III • Marketing B2B</span>
+                </div>
+              </div>
+
+              {/* Success Badge */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: 'var(--success)',
+                marginTop: '2rem',
+                fontSize: '0.85rem',
+                fontWeight: 700
+              }}>
+                <CheckCircle2 size={16} />
+                <span>APRESENTAÇÃO CONCLUÍDA COM SUCESSO</span>
+              </div>
+            </div>
+          )}
 
         </div>
       </div>
@@ -430,7 +551,7 @@ function App() {
         }} />
 
         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          <strong>WEG S.A.</strong> • PROJETO INTEGRADO MULTIDISCIPLINAR III
+          <strong>WEG S.A.</strong> • PROJETO INTEGRADO MULTIDISCIPLINAR III • MARKETING
         </div>
 
         <div style={{
@@ -447,7 +568,7 @@ function App() {
         </div>
       </footer>
 
-      {/* Responsive and bounce selectors */}
+      {/* Responsive and Spline grid layouts */}
       <style>{`
         @media (min-width: 1024px) {
           .desktop-nav-container {
@@ -458,6 +579,12 @@ function App() {
           }
           .vercel-badge {
             display: inline-flex !important;
+          }
+          .hero-slide-grid {
+            grid-template-columns: 55% 45% !important;
+          }
+          .hero-right-col {
+            display: block !important;
           }
         }
         @keyframes bounce {
