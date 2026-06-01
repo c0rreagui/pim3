@@ -226,7 +226,7 @@ function App() {
       {currentSlide === 0 && (
         <div style={{
           position: 'absolute',
-          top: '80px',
+          top: '75px',
           right: 0,
           bottom: 0,
           left: '55%',
@@ -235,7 +235,7 @@ function App() {
           overflow: 'hidden'
         }} className="hero-spline-overlay">
           <div
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', transform: 'scale(0.82)', transformOrigin: 'top right' }}
             dangerouslySetInnerHTML={{
               __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%" style="background:transparent"></spline-viewer>'
             }}
