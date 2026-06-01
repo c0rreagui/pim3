@@ -55,6 +55,116 @@ function App() {
     };
   }, []);
 
+  // Autonomous & Random Spline Robot Arm Rotation Animation
+  useEffect(() => {
+    if (currentSlide !== 0) return;
+
+    let active = true;
+    let animationFrameId: number;
+
+    const setupSplineAnimation = () => {
+      const viewer = document.querySelector('spline-viewer') as any;
+      if (!viewer) {
+        // If not rendered yet, retry
+        if (active) {
+          setTimeout(setupSplineAnimation, 100);
+        }
+        return;
+      }
+
+      const handleLoadComplete = () => {
+        const app = viewer.spline;
+        if (!app || !app.scene) return;
+
+        // Find main 3D groups to animate
+        const targetObjects: any[] = [];
+        app.scene.children.forEach((child: any) => {
+          // Exclude cameras, lights, and helpers
+          if (
+            child &&
+            child.type &&
+            !child.type.includes('Light') &&
+            !child.type.includes('Camera') &&
+            !child.type.includes('Helper') &&
+            (child.type === 'Group' || child.type === 'Object3D')
+          ) {
+            targetObjects.push(child);
+          }
+        });
+
+        if (targetObjects.length === 0) return;
+
+        // Initialize state for each target object
+        const states = targetObjects.map((obj) => ({
+          obj,
+          baseRotX: obj.rotation.x,
+          baseRotY: obj.rotation.y,
+          baseRotZ: obj.rotation.z,
+          targetRotX: obj.rotation.x,
+          targetRotY: obj.rotation.y,
+          targetRotZ: obj.rotation.z,
+          speed: 0.01,
+          nextChangeTime: 0
+        }));
+
+        const animate = (time: number) => {
+          if (!active) return;
+
+          states.forEach((state) => {
+            const obj = state.obj;
+
+            // Change target rotation randomly every 3-6 seconds
+            if (time > state.nextChangeTime) {
+              // Smooth movement: rotate up to 45 degrees (0.78 rad) or 90 degrees (1.57 rad)
+              // Let's do up to 45 degrees in X/Z to keep it looking stable, and up to 90 degrees in Y (yaw)
+              state.targetRotX = state.baseRotX + (Math.random() - 0.5) * (Math.PI / 2); // +/- 45 deg
+              state.targetRotY = state.baseRotY + (Math.random() - 0.5) * Math.PI;       // +/- 90 deg
+              state.targetRotZ = state.baseRotZ + (Math.random() - 0.5) * (Math.PI / 2); // +/- 45 deg
+
+              // Easing interpolation speed
+              state.speed = 0.005 + Math.random() * 0.01;
+
+              // Next target change
+              state.nextChangeTime = time + 3000 + Math.random() * 3000;
+            }
+
+            // Smooth interpolation (lerp)
+            obj.rotation.x += (state.targetRotX - obj.rotation.x) * state.speed;
+            obj.rotation.y += (state.targetRotY - obj.rotation.y) * state.speed;
+            obj.rotation.z += (state.targetRotZ - obj.rotation.z) * state.speed;
+          });
+
+          animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
+      };
+
+      viewer.addEventListener('load-complete', handleLoadComplete);
+
+      // If already loaded, trigger immediately
+      if (viewer.spline && viewer.spline.scene) {
+        handleLoadComplete();
+      }
+
+      return () => {
+        viewer.removeEventListener('load-complete', handleLoadComplete);
+      };
+    };
+
+    const cleanup = setupSplineAnimation();
+
+    return () => {
+      active = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      if (typeof cleanup === 'function') {
+        cleanup();
+      }
+    };
+  }, [currentSlide]);
+
   const handleNext = () => {
     setCurrentSlide((prev) => Math.min(prev + 1, TOTAL_SLIDES - 1));
   };
