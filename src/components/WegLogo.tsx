@@ -17,61 +17,31 @@ export const WegLogo: React.FC<WegLogoProps> = ({
     <svg 
       width={width} 
       height={height} 
-      viewBox="0 0 150 90" 
+      viewBox="0 0 979.15 686.52" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={{ display: 'inline-block', verticalAlign: 'middle' }}
     >
-      {/* 
-        Official Geometric WEG Logo Grid Representation (15x9 Grid)
-        Each cell unit is 10x10 pixels.
-        Color represents the corporate WEG Blue (or theme color).
-      */}
-      
-      {/* 1. Top border horizontal line (Row 0, Cols 0 to 13) */}
-      <rect x="0" y="0" width="140" height="10" fill={color} />
-      
-      {/* 2. Left border vertical line (Col 0, Rows 1 to 6) - stops before Row 7 (the gap) */}
-      <rect x="0" y="10" width="10" height="50" fill={color} />
-      
-      {/* 3. Bottom border horizontal line (Row 8, Cols 0 to 14) */}
-      <rect x="0" y="80" width="150" height="10" fill={color} />
-      
-      {/* 4. Right border & G right line vertical connector (Col 14, Rows 2 to 7) */}
-      <rect x="140" y="20" width="10" height="60" fill={color} />
-
-      {/* --- LETTER W --- */}
-      {/* W Leg 1 (Col 2) */}
-      <rect x="20" y="20" width="10" height="50" fill={color} />
-      {/* W Leg 2 (Col 4) */}
-      <rect x="40" y="20" width="10" height="50" fill={color} />
-      {/* W Leg 3 (Col 6) */}
-      <rect x="60" y="20" width="10" height="50" fill={color} />
-      {/* W Bottom Connector (Cols 2 to 6, Row 6) */}
-      <rect x="20" y="60" width="50" height="10" fill={color} />
-
-      {/* --- LETTER E --- */}
-      {/* E Back vertical (Col 8) */}
-      <rect x="80" y="20" width="10" height="50" fill={color} />
-      {/* E Top horizontal bar (Row 2, Cols 9 to 10) */}
-      <rect x="90" y="20" width="20" height="10" fill={color} />
-      {/* E Middle horizontal bar (Row 4, Cols 9 to 10) */}
-      <rect x="90" y="40" width="20" height="10" fill={color} />
-      {/* E Bottom horizontal bar (Row 6, Cols 9 to 10) */}
-      <rect x="90" y="60" width="20" height="10" fill={color} />
-
-      {/* --- LETTER G --- */}
-      {/* G Left vertical (Col 12) */}
-      <rect x="110" y="20" width="10" height="50" fill={color} />
-      {/* G Top horizontal bar (Row 2, Cols 13 to 14) */}
-      <rect x="120" y="20" width="30" height="10" fill={color} />
-      {/* G Middle horizontal bar (Row 4, Cols 13 to 14) */}
-      <rect x="120" y="40" width="20" height="10" fill={color} />
-      {/* G Bottom horizontal bar (Row 6, Cols 13 to 14) */}
-      <rect x="120" y="60" width="30" height="10" fill={color} />
-      {/* G Right vertical bar (Col 14, Rows 3 to 5) - connects with G's top/bottom and right border */}
-      <rect x="140" y="30" width="10" height="30" fill={color} />
+      <g transform="translate(137.74169, 1011.3389)">
+        {/* Letter W part / Left Frame Part */}
+        <polygon
+          points="217.56,496.18 216.95,496.18 216.95,407.21 280.02,407.21 280.02,471.2 265.5,471.2 265.5,421.84 255.75,421.84 255.75,471.8 241.23,471.8 241.23,421.84 232.09,421.84 232.09,481.55 378.32,481.55 378.32,496.18 217.56,496.18"
+          transform="matrix(6.067427, 0, 0, -6.0901238, -1454.07, 2010.4587)"
+          fill={color}
+        />
+        {/* Letter G part / Right and Bottom Frame Part */}
+        <path
+          d="M 605.10596,-859.2258 L 605.10596,-469.45538 L 749.29051,-469.45538 L 749.29051,-406.4222 L -137.74169,-406.4222 L -137.74169,-324.81401 L 841.40423,-324.81401 L 841.40423,-859.2258 L 608.91231,-859.2258 L 605.10596,-859.2258 z M 693.56552,-766.35082 L 749.29051,-766.35082 L 749.29051,-554.86991 L 693.56552,-554.86991 L 693.56552,-766.35082 z"
+          fill={color}
+        />
+        {/* Letter E part / Middle Part */}
+        <path
+          d="M 302.12032,-859.2258 L 302.12032,-469.45538 L 549.53322,-469.45538 L 549.53322,-554.86991 L 390.57997,-554.86991 L 390.57997,-614.249 L 553.18727,-614.249 L 553.18727,-859.2258 L 302.12032,-859.2258 z M 390.57997,-770.15717 L 460.92135,-770.15717 L 460.92135,-699.51128 L 390.57997,-699.51128 L 390.57997,-770.15717 z"
+          fill={color}
+        />
+      </g>
     </svg>
   );
 };
+

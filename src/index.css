@@ -48,6 +48,12 @@
 
 body {
   background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(at 50% 0%, rgba(0, 87, 158, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 45px 45px, 45px 45px;
   color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -125,6 +131,24 @@ body {
   50% { opacity: 0.9; }
 }
 
+@keyframes flowEnergy {
+  0% { background-position: 100% 0%; }
+  100% { background-position: -100% 0%; }
+}
+
+/* Flowing Energy Line Indicator */
+.top-energy-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-light), var(--success), transparent);
+  background-size: 200% 100%;
+  animation: flowEnergy 4s linear infinite;
+  z-index: 101;
+}
+
 /* Base Styles */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -147,15 +171,31 @@ button, input, select {
 
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   box-shadow: 0 8px 32px 0 var(--glass-shadow);
   border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01) 50%, rgba(0, 87, 158, 0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 136, 255, 0.2);
+  box-shadow: 0 12px 40px 0 rgba(0, 87, 158, 0.2);
+  transform: translateY(-2px);
 }

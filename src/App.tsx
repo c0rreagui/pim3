@@ -65,6 +65,7 @@ function App() {
 
   return (
     <div className="presentation-container">
+      <div className="top-energy-bar" />
       
       {/* Floating Header */}
       <header style={{
@@ -341,13 +342,11 @@ function App() {
                 display: 'none',
                 opacity: 0.95
               }} className="hero-right-col">
-                <iframe 
-                  src="https://my.spline.design/interactiverobotarm-WbI71wst4wRZehMOkhvnBJnC/" 
-                  frameBorder="0" 
-                  width="100%" 
-                  height="100%"
-                  style={{ border: 'none', background: 'transparent' }}
-                  title="Spline 3D Interactive Robot Arm"
+                <div 
+                  style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
+                  dangerouslySetInnerHTML={{
+                    __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%"></spline-viewer>'
+                  }}
                 />
               </div>
 

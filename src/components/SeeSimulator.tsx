@@ -61,8 +61,10 @@ export const SeeSimulator: React.FC = () => {
   const tcoData10Years = getTcoData(10);
   const tenYearSavings = tcoData10Years[10].savings;
 
+  const [activeTab, setActiveTab] = useState<'b2b' | 'trade'>('b2b');
+
   return (
-    <section id="comportamento-consumidor-ux" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.5rem' }}>
+    <section id="comportamento-consumidor-ux" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', paddingBottom: '0.25rem' }}>
       <SectionHeader
         tag="TÓPICO 2"
         title="Comportamento do Consumidor & UX"
@@ -73,71 +75,130 @@ export const SeeSimulator: React.FC = () => {
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-        gap: '2rem',
-        marginBottom: '3rem'
+        gap: '1.25rem',
+        marginBottom: '0.5rem',
+        flex: 1
       }}>
-        {/* Texts */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
-          <div className="glass-panel" style={{ padding: '1.75rem' }}>
-            <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Sparkles size={18} style={{ color: 'var(--success)' }} />
-              Decisão Racional B2B & Software See+
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-              No marketing industrial B2B, a compra não é motivada por impulsividade. Compradores e engenheiros tomam decisões extremamente lógicas avaliando o <strong>Custo Total de Propriedade (TCO)</strong> em vez de focar apenas no custo de aquisição (CAPEX). A WEG se posiciona como líder de valor ao demonstrar ROI com o <strong>Software See+</strong>, simulando economias energéticas e operacionais reais.
-            </p>
+        {/* Texts with interactive Tab Toggle */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
+          {/* Tab Selector */}
+          <div style={{
+            display: 'flex',
+            background: 'rgba(10, 15, 36, 0.6)',
+            padding: '0.25rem',
+            borderRadius: '10px',
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            gap: '0.25rem'
+          }}>
+            <button
+              onClick={() => setActiveTab('b2b')}
+              style={{
+                flex: 1,
+                padding: '0.5rem 0.75rem',
+                borderRadius: '8px',
+                border: 'none',
+                background: activeTab === 'b2b' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+                color: activeTab === 'b2b' ? '#ffffff' : 'var(--text-secondary)',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.4rem'
+              }}
+            >
+              <Sparkles size={14} style={{ color: activeTab === 'b2b' ? 'var(--success)' : 'var(--text-muted)' }} />
+              Decisão B2B & See+
+            </button>
+            <button
+              onClick={() => setActiveTab('trade')}
+              style={{
+                flex: 1,
+                padding: '0.5rem 0.75rem',
+                borderRadius: '8px',
+                border: 'none',
+                background: activeTab === 'trade' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
+                color: activeTab === 'trade' ? '#ffffff' : 'var(--text-secondary)',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.4rem'
+              }}
+            >
+              <Scale size={14} style={{ color: activeTab === 'trade' ? 'var(--success)' : 'var(--text-muted)' }} />
+              Plano de Troca (TCO)
+            </button>
           </div>
 
-          <div className="glass-panel" style={{ padding: '1.75rem' }}>
-            <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Scale size={18} style={{ color: 'var(--success)' }} />
-              Plano de Troca de Motores (Switching Costs)
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1rem' }}>
-              Para vencer a barreira de marcas concorrentes e engajar clientes na sustentabilidade, a WEG aceita motores usados de <strong>qualquer marca</strong>. O cliente obtém um abatimento real de <strong>R$ 5,00 por kg</strong> ou de <strong>até 8% de desconto</strong> na compra dos modernos motores das linhas <strong>IE4 ou IE5</strong>.
-            </p>
-            <div style={{
-              display: 'flex',
-              gap: '1rem'
-            }}>
+          {/* Active Tab Panel */}
+          {activeTab === 'b2b' ? (
+            <div className="glass-panel" style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
+              <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Sparkles size={18} style={{ color: 'var(--success)' }} />
+                Decisão Racional B2B & Software See+
+              </h4>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
+                No marketing industrial B2B, a compra não é motivada por impulsividade. Compradores e engenheiros tomam decisões extremamente lógicas avaliando o <strong>Custo Total de Propriedade (TCO)</strong> em vez de focar apenas no custo de aquisição (CAPEX). A WEG se posiciona como líder de valor ao demonstrar ROI com o <strong>Software See+</strong>, simulando economias energéticas e operacionais reais.
+              </p>
+            </div>
+          ) : (
+            <div className="glass-panel" style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
+              <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Scale size={18} style={{ color: 'var(--success)' }} />
+                Plano de Troca de Motores (Switching Costs)
+              </h4>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', marginBottom: '0.75rem' }}>
+                Para vencer a barreira de marcas concorrentes e engajar clientes na sustentabilidade, a WEG aceita motores usados de <strong>qualquer marca</strong>. O cliente obtém um abatimento real de <strong>R$ 5,00 por kg</strong> ou de <strong>até 8% de desconto</strong> na compra dos modernos motores das linhas <strong>IE4 ou IE5</strong>.
+              </p>
               <div style={{
-                background: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.2)',
-                padding: '0.75rem',
-                borderRadius: '8px',
-                flex: 1,
-                textAlign: 'center'
+                display: 'flex',
+                gap: '0.75rem'
               }}>
-                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'block', fontWeight: 600 }}>Valor de Troca</span>
-                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--success)' }}>R$ 5,00 / kg</span>
-              </div>
-              <div style={{
-                background: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.2)',
-                padding: '0.75rem',
-                borderRadius: '8px',
-                flex: 1,
-                textAlign: 'center'
-              }}>
-                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'block', fontWeight: 600 }}>Desconto Máximo</span>
-                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--success)' }}>Até 8%</span>
+                <div style={{
+                  background: 'rgba(16, 185, 129, 0.06)',
+                  border: '1px solid rgba(16, 185, 129, 0.15)',
+                  padding: '0.5rem',
+                  borderRadius: '8px',
+                  flex: 1,
+                  textAlign: 'center'
+                }}>
+                  <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'block', fontWeight: 600 }}>Valor de Troca</span>
+                  <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--success)' }}>R$ 5,00 / kg</span>
+                </div>
+                <div style={{
+                  background: 'rgba(16, 185, 129, 0.06)',
+                  border: '1px solid rgba(16, 185, 129, 0.15)',
+                  padding: '0.5rem',
+                  borderRadius: '8px',
+                  flex: 1,
+                  textAlign: 'center'
+                }}>
+                  <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: 'var(--text-secondary)', display: 'block', fontWeight: 600 }}>Desconto Máximo</span>
+                  <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--success)' }}>Até 8%</span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* See+ Simulator Widget */}
-        <div className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left', border: '1px solid var(--border-active)' }}>
+        <div className="glass-panel" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', textAlign: 'left', border: '1px solid var(--border-active)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h4 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ffffff' }}>
+            <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff' }}>
               Simulador de TCO & ROI "See+"
             </h4>
             <span style={{
-              fontSize: '0.65rem',
+              fontSize: '0.6rem',
               fontWeight: 700,
               background: 'rgba(59, 130, 246, 0.15)',
               color: 'var(--primary-light)',
-              padding: '0.2rem 0.5rem',
+              padding: '0.15rem 0.4rem',
               borderRadius: '6px',
               fontFamily: 'var(--font-mono)'
             }}>
@@ -147,50 +208,49 @@ export const SeeSimulator: React.FC = () => {
 
           {/* Efficiency Selection */}
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.5rem' }}>
-              Selecione o Motor WEG de Alta Eficiência
-            </label>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
               <button 
                 onClick={() => setMotorEfficiencyClass('IE4')}
                 style={{
                   flex: 1,
-                  padding: '0.75rem',
-                  borderRadius: '10px',
+                  padding: '0.4rem',
+                  borderRadius: '8px',
                   border: '1px solid',
-                  borderColor: motorEfficiencyClass === 'IE4' ? 'var(--success)' : 'rgba(255,255,255,0.08)',
+                  borderColor: motorEfficiencyClass === 'IE4' ? 'var(--success)' : 'rgba(255,255,255,0.06)',
                   background: motorEfficiencyClass === 'IE4' ? 'rgba(16,185,129,0.1)' : 'transparent',
                   color: motorEfficiencyClass === 'IE4' ? '#ffffff' : 'var(--text-secondary)',
                   cursor: 'pointer',
                   fontWeight: 600,
+                  fontSize: '0.75rem',
                   transition: 'all 0.2s'
                 }}
               >
-                WEG W22 Magnet IE4 Super Premium
+                WEG W22 Magnet IE4
               </button>
               <button 
                 onClick={() => setMotorEfficiencyClass('IE5')}
                 style={{
                   flex: 1,
-                  padding: '0.75rem',
-                  borderRadius: '10px',
+                  padding: '0.4rem',
+                  borderRadius: '8px',
                   border: '1px solid',
-                  borderColor: motorEfficiencyClass === 'IE5' ? 'var(--success)' : 'rgba(255,255,255,0.08)',
+                  borderColor: motorEfficiencyClass === 'IE5' ? 'var(--success)' : 'rgba(255,255,255,0.06)',
                   background: motorEfficiencyClass === 'IE5' ? 'rgba(16,185,129,0.1)' : 'transparent',
                   color: motorEfficiencyClass === 'IE5' ? '#ffffff' : 'var(--text-secondary)',
                   cursor: 'pointer',
                   fontWeight: 600,
+                  fontSize: '0.75rem',
                   transition: 'all 0.2s'
                 }}
               >
-                WEG W22 Magnet IE5 Ultra Premium
+                WEG W22 Magnet IE5
               </button>
             </div>
           </div>
 
           {/* Running Hours Slider */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.15rem' }}>
               <span>Horas de Funcionamento Anual:</span>
               <strong style={{ color: '#ffffff' }}>{runningHours} h/ano</strong>
             </div>
@@ -214,7 +274,7 @@ export const SeeSimulator: React.FC = () => {
 
           {/* Energy Price Slider */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.15rem' }}>
               <span>Tarifa de Energia Elétrica:</span>
               <strong style={{ color: '#ffffff' }}>R$ {energyTariff.toFixed(2)} / kWh</strong>
             </div>
@@ -238,8 +298,8 @@ export const SeeSimulator: React.FC = () => {
 
           {/* Motor Weight Slider */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
-              <span>Peso do Motor Usado (para Plano de Troca):</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.15rem' }}>
+              <span>Peso do Motor Usado:</span>
               <strong style={{ color: '#ffffff' }}>{motorWeight} kg</strong>
             </div>
             <input 
@@ -263,66 +323,66 @@ export const SeeSimulator: React.FC = () => {
           {/* Outputs Panel */}
           <div style={{
             background: 'rgba(0, 0, 0, 0.4)',
-            border: '1px solid rgba(255,255,255,0.05)',
-            borderRadius: '12px',
-            padding: '1.25rem',
+            border: '1px solid rgba(255,255,255,0.04)',
+            borderRadius: '10px',
+            padding: '0.75rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1rem'
+            gap: '0.5rem'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                <Zap size={14} style={{ color: 'var(--accent)' }} />
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <Zap size={12} style={{ color: 'var(--accent)' }} />
                 Economia de Energia:
               </span>
-              <span style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>
                 {annualKwhSaved.toFixed(0)} kWh/ano
               </span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                <DollarSign size={14} style={{ color: 'var(--success)' }} />
-                Economia Financeira Anual:
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <DollarSign size={12} style={{ color: 'var(--success)' }} />
+                Economia Anual:
               </span>
-              <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--success)' }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--success)' }}>
                 R$ {annualSavingsBrl.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
               </span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                <Percent size={14} style={{ color: 'var(--primary-light)' }} />
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <Percent size={12} style={{ color: 'var(--primary-light)' }} />
                 Abatimento no Plano de Troca:
               </span>
-              <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary-light)' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-light)' }}>
                 - R$ {appliedDiscount.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
               </span>
             </div>
 
             <div style={{
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-              paddingTop: '0.75rem',
+              borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+              paddingTop: '0.4rem',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                <TrendingDown size={14} style={{ color: 'var(--accent)' }} />
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <TrendingDown size={12} style={{ color: 'var(--accent)' }} />
                 Payback do Investimento:
               </span>
-              <span style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--accent)' }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--accent)' }}>
                 {paybackMonths <= 0 ? 'Imediato' : `${paybackMonths.toFixed(1)} Meses`}
               </span>
             </div>
 
             <div style={{
-              background: 'rgba(16, 185, 129, 0.05)',
-              border: '1px solid rgba(16, 185, 129, 0.15)',
-              borderRadius: '8px',
-              padding: '0.75rem',
+              background: 'rgba(16, 185, 129, 0.04)',
+              border: '1px solid rgba(16, 185, 129, 0.12)',
+              borderRadius: '6px',
+              padding: '0.4rem',
               textAlign: 'center',
-              fontSize: '0.8rem',
+              fontSize: '0.75rem',
               color: 'var(--text-secondary)'
             }}>
               Economia total em 10 anos estimada em{' '}
