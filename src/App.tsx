@@ -222,6 +222,27 @@ function App() {
         </div>
       )}
 
+      {/* 3D Robot Arm: viewport-level overlay, only on cover slide */}
+      {currentSlide === 0 && (
+        <div style={{
+          position: 'absolute',
+          top: '75px',
+          right: 0,
+          bottom: '50px',
+          width: '50%',
+          zIndex: 3,
+          pointerEvents: 'auto',
+          overflow: 'hidden'
+        }} className="hero-spline-overlay">
+          <div
+            style={{ width: '100%', height: '100%' }}
+            dangerouslySetInnerHTML={{
+              __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%" style="background:transparent"></spline-viewer>'
+            }}
+          />
+        </div>
+      )}
+
       {/* Fullscreen Slide Viewport Canvas */}
       <div className="slide-canvas">
         <div className="slide-active" key={currentSlide} style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -229,17 +250,15 @@ function App() {
           {/* Cover Slide (0) */}
           {currentSlide === 0 && (
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              alignItems: 'center',
-              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
               width: '100%',
-              minHeight: '75vh',
-              gap: '2rem'
+              height: '100%'
             }} className="hero-slide-grid">
               
               {/* Left Column: Text & Content */}
-              <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 2, position: 'relative' }} className="hero-left-col">
+              <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 2, position: 'relative', maxWidth: '52%' }} className="hero-left-col">
                 {/* WEG Slogan */}
                 <div style={{
                   display: 'inline-flex',
@@ -304,25 +323,6 @@ function App() {
                 </div>
 
 
-              </div>
-
-              {/* Right Column: 3D Robot Arm Spline Embed */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '48%',
-                height: '100%',
-                zIndex: 1,
-                display: 'none',
-                pointerEvents: 'auto'
-              }} className="hero-right-col">
-                <div 
-                  style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
-                  dangerouslySetInnerHTML={{
-                    __html: '<spline-viewer url="https://prod.spline.design/ry6aYkpkn76CYg4N/scene.splinecode" loading="eager" width="100%" height="100%" style="background:transparent"></spline-viewer>'
-                  }}
-                />
               </div>
 
             </div>
@@ -546,7 +546,7 @@ function App() {
         </div>
       </footer>
 
-      {/* Responsive and Spline grid layouts */}
+      {/* Responsive styles */}
       <style>{`
         @media (min-width: 1024px) {
           .desktop-nav-container {
@@ -558,11 +558,14 @@ function App() {
           .vercel-badge {
             display: inline-flex !important;
           }
-          .hero-slide-grid {
-            grid-template-columns: 55% 45% !important;
+        }
+        /* Hide robot arm on small screens */
+        @media (max-width: 1023px) {
+          .hero-spline-overlay {
+            display: none !important;
           }
-          .hero-right-col {
-            display: block !important;
+          .hero-left-col {
+            max-width: 100% !important;
           }
         }
         @keyframes bounce {
