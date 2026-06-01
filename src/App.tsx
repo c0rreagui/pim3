@@ -9,7 +9,7 @@ import { CostParadox } from './components/CostParadox';
 import { AIShowroom } from './components/AIShowroom';
 import { GCLPProgram } from './components/GCLPProgram';
 import { WegLogo } from './components/WegLogo';
-import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, GraduationCap, Menu, X, ArrowLeft, ArrowRight } from 'lucide-react';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -276,13 +276,13 @@ function App() {
                 </h1>
 
                 <p style={{
-                  fontSize: 'clamp(0.95rem, 2vw, 1.15rem)',
+                  fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                   color: 'var(--text-secondary)',
                   maxWidth: '580px',
                   lineHeight: '1.6',
                   marginBottom: '2rem'
                 }}>
-                  Análise integrada multidisciplinar em marketing, custos e inovação tecnológica sobre a **WEG S.A.** Concebido para a banca examinadora do PIM III da Universidade Paulista.
+                  A WEG S.A. (bolsa brasileira: WEGE3) é uma multinacional brasileira e uma das maiores fabricantes globais de equipamentos eletroeletrônicos. Fundada em 1961 e sediada em Jaraguá do Sul (SC), atua nos setores de máquinas elétricas, automação, tintas e soluções para geração e distribuição de energia.
                 </p>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
@@ -331,11 +331,10 @@ function App() {
 
               {/* Right Column: 3D Robot Hand Spline Embed */}
               <div style={{
-                position: 'absolute',
-                top: '-40px',
-                right: '-40px',
-                width: '50%',
-                height: '110%',
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                minHeight: '450px',
                 zIndex: 1,
                 borderRadius: '24px',
                 overflow: 'hidden',
@@ -407,42 +406,44 @@ function App() {
               {/* Academic Credits */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                 gap: '1.5rem',
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1px solid rgba(255, 255, 255, 0.05)',
-                padding: '1.5rem 2.5rem',
+                padding: '1.5rem 2rem',
                 borderRadius: '16px',
-                maxWidth: '700px',
+                maxWidth: '850px',
                 width: '100%',
                 textAlign: 'left'
               }}>
                 <div>
-                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Autor / CTO</span>
-                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>Guilherme</span>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600, marginBottom: '0.5rem' }}>Integrantes do Grupo</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
+                      <strong style={{ color: '#ffffff' }}>1. Bruno Arabe</strong> — RA: H7519H-0
+                    </div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
+                      <strong style={{ color: '#ffffff' }}>2. Igor Lopes do Carmo</strong> — RA: R95832-9
+                    </div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
+                      <strong style={{ color: '#ffffff' }}>3. Guilherme Corrêa dos Santos Silva</strong> — RA: H76181-6
+                    </div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
+                      <strong style={{ color: '#ffffff' }}>4. David Paiva Lima Lopes</strong> — RA: R822HG-2
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Instituição</span>
-                  <span style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>Universidade Paulista (UNIP)</span>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center' }}>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Instituição</span>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ffffff' }}>Universidade Paulista (UNIP)</span>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Estrutura de Projeto</span>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary-light)' }}>PIM III • Marketing</span>
+                  </div>
                 </div>
-                <div>
-                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Estrutura de Projeto</span>
-                  <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary-light)' }}>PIM III • Marketing B2B</span>
-                </div>
-              </div>
-
-              {/* Success Badge */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: 'var(--success)',
-                marginTop: '2rem',
-                fontSize: '0.85rem',
-                fontWeight: 700
-              }}>
-                <CheckCircle2 size={16} />
-                <span>APRESENTAÇÃO CONCLUÍDA COM SUCESSO</span>
               </div>
             </div>
           )}
