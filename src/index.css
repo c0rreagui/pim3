@@ -206,3 +206,38 @@ button, input, select {
   height: 100%;
   display: block;
 }
+
+/* 🎥 PROJECTOR VIEW OPTIMIZATIONS (High Contrast & Large Font Scale) */
+.presentation-container h2 {
+  font-size: 2.75rem !important; /* Scale up main slide title for projection screens */
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.presentation-container p:not(.huge-number-class) {
+  font-size: 1.15rem; /* Increase global descriptive paragraph text */
+  line-height: 1.65 !important;
+}
+
+/* Increase card headers for instant scannability from the back */
+.glass-panel h4 {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+}
+
+/* High-contrast and bolder body text prevents wash-out by high-power projector lamps */
+.glass-panel p, 
+.glass-panel li {
+  font-size: 1.05rem !important;
+  font-weight: 500 !important; 
+  line-height: 1.65 !important;
+  color: #ffffff !important; /* Force pristine white text for deep contrast */
+}
+
+/* Make navigation button controls and headers larger for easy focus */
+header button,
+.view-toggle-container button {
+  font-size: 0.92rem !important;
+  padding: 0.6rem 1.25rem !important;
+}
